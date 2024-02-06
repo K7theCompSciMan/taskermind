@@ -7,7 +7,7 @@
 
     <li> w sucks 1</li>
     <li> w sucks 2</li>
-    <li> w sucks 3</li>
+    <li> l sucks 3</li>
     <li> w sucks 4</li>
     <li> w sucks 5</li>
     <li> w sucks 6</li>
