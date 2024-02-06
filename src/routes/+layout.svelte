@@ -8,7 +8,8 @@
         path: string;}
 
     let pages: Page[] = [
-        {name: "Home", path: "/"}
+        {name: "Home", path: "/"},
+        {name: "About", path: "/about"}
     ]
     let dropdown = false;
 </script>   
