@@ -17,7 +17,7 @@
         {#each pages as page}
                 <Button name={page.name} onclick={() => goto(page.path)} />
         {/each}
-        <h1 class="text-2xl p-1 bg-orange-500 w-fit">TaskerMind</h1>
+        <h1 class="justify-center text-2xl p-1 bg-orange-500 w-fit ">TaskerMind</h1>
     </nav>
     <slot />
 </div>
