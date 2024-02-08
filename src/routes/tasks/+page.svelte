@@ -1,37 +1,37 @@
-<script>
-    let count = 0;
 
-    function increment() {
-        count += 1;
-    }
-    $: if(count >= 10) {
-        alert("You clicked more than 10 times")
-    }
 
-    function resetPls() {
-        count = 0;
-        alert("Red]set")
+<script context = "module">
+
+    export async function load( { fetch}) {
+        const res = await fetch('https://jsonplaceholder.typicode.com/posts')
+        const guides = await res.JSON()
+
+        if (res.ok){
+            return {
+                props: {
+                    guides
+                }
+            }
+        }
+
+        return {
+            status: res.status,
+            error: new Error('Failed to fetch guides')
+        }
     }
 </script>
 
+<script>
+    export let guides
+</script>
 
-<button on:click={increment}>
-	Clicked {count}
-	{count === 1 ? 'time' : 'times'}
-    
-</button>
-<button on:click={resetPls}>
-    Reset
-    
-</button>
+<dive class = "guides">
 
-<style>
-    button {
-        background-color: rgb(49, 15, 145);
-        color: #fff;
-        padding: 2em;
-        border: none;
-        border-radius: 5em;
-        cursor: pointer;
-    }
-</style>
+    <ul>
+        {#each guides as guide}
+        <li>
+            <a href = "/">{guide.title}</a>
+        </li>
+        {/each}
+    </ul>
+</dive>
