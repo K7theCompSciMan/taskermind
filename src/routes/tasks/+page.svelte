@@ -1,37 +1,50 @@
 
-
-<script context = "module">
-
-    export async function load( { fetch}) {
-        const res = await fetch('https://jsonplaceholder.typicode.com/posts')
-        const guides = await res.JSON()
-
-        if (res.ok){
-            return {
-                props: {
-                    guides
-                }
-            }
-        }
-
+<script context="module">
+    export async function load({  fetch }) {
+      const res = await fetch('https://jsonplaceholder.typicode.com/posts')
+      const guides = await res.json()
+  
+      if (res.ok) {
         return {
-            status: res.status,
-            error: new Error('Failed to fetch guides')
+          props: {
+            guides
+          }
         }
+      }
+  
+      return {
+        status: res.status,
+        error: new Error('Could not fetch the guides')
+      }
     }
-</script>
-
-<script>
+  </script>
+  
+  <script>
     export let guides
-</script>
-
-<dive class = "guides">
-
+  </script>
+  
+  <div class="guides">
     <ul>
-        {#each guides as guide}
+      {#each guides as guide}
         <li>
-            <a href = "/">{guide.title}</a>
+          <a href='/'>{guide.title}</a>
         </li>
-        {/each}
+      {/each}
     </ul>
-</dive>
+  </div>
+  
+  <style>
+    .guides {
+      margin-top: 20px;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    a {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px;
+      border: 1px dotted rgba(255,255,255,0.2);
+    }
+  </style>
