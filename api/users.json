@@ -1,0 +1,18 @@
+{
+	"users": [
+		{
+			"id": 1,
+			"username": "admin",
+			"password": "admin",
+			"email": "admin@test.taskermind.com",
+            "tasks": []
+		},
+		{
+			"id": 2,
+			"username": "user",
+			"password": "user",
+			"email": "user@test.taskermind.com",
+            "tasks": []
+		}
+	]
+}

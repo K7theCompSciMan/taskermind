@@ -25,7 +25,7 @@ function saveUsers() {
 export const getUsers = async (): Promise<User[]> => {
 	return Object.values(users);
 };
-export const getUser = async (id: number): Promise<User> => {
+export const getUserById = async (id: number): Promise<User> => {
 	return users[id];
 };
 export const createUser = async (userData: User): Promise<User | null> => {
@@ -80,8 +80,8 @@ export const getUserByEmail = async (email: string): Promise<User | null> => {
     return user;
 };
 
-export const checkPassword = async (email: string, password: string): Promise<boolean> => {
-    const user = await getUserByEmail(email);
+export const checkPassword = async (id: number, password: string): Promise<boolean> => {
+    const user = await getUserById(id);
 
     if (user) {
         return bcrypt.compare(password, user.password);
