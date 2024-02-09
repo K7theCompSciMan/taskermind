@@ -6,6 +6,6 @@
     export let size: string = "w-44";
 </script>
 
-<button class="p-2 m-2 rounded-2xl border-gray-300 border-8 bg-sky-400 {size} hover:bg-sky-500 hover:border-gray-400" on:mouseenter={() => hover()} on:click={() => onclick()} on:mouseleave={() => leave()}  
+<button class="p-2 m-2 rounded-2xl shadow-lg bg-sky-400 {size} hover:bg-sky-500 hover:border-gray-400 hover:shadow-slate-300 transition-shadow" style="transition:0.5s" on:mouseenter={() => hover()} on:click={() => onclick()} on:mouseleave={() => leave()}  
 	>{name}</button
->  
+>

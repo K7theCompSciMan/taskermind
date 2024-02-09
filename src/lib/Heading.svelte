@@ -11,10 +11,13 @@
 </script>
 
 {#if logo}
-    <img {src} alt="TaskerMind Logo" class="w-20 h-20 m-2 rounded-3xl"/>
-{/if}
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+    <img {src} alt="TaskerMind Logo" class="w-20 h-20 m-2 rounded-3xl hover:cursor-pointer" on:click={() =>onclick()}/>
+{:else}
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-static-element-interactions -->
-<div class="text-{textsize} p-2 m-2 bg-orange-500 {size} border-8 rounded-2xl border-gray-300 font-{color} font-{weight} {style} hover:cursor-pointer" on:click={() =>onclick()}>
-    {name}
-</div>
+    <div class="text-{textsize} p-2 m-2 bg-orange-500 {size} border-8 rounded-2xl border-gray-300 font-{color} font-{weight} {style} hover:cursor-pointer" on:click={() =>onclick()}>
+        {name}
+    </div>
+{/if}

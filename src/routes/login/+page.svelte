@@ -2,7 +2,7 @@
     import Button from '$lib/Button.svelte';
 </script>
 <div class="flex justify-center">
-    <div class="justify-center text-center w-[22rem] bg-blue-500 rounded-2xl m-4">
+    <div class="justify-center text-center w-[22rem] bg-blue-500 rounded-2xl m-4 shadow-2xl">
         <div class="m-2 font-bold text-2xl ">
             Login to TaskerMind
         </div>
