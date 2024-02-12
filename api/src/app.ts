@@ -2,7 +2,7 @@ import express from 'express';
 import * as dotenv from 'dotenv';
 import cors from 'cors';
 import helmet from 'helmet';
-import { userRouter } from './user/user.routes';
+import { userRouter } from './user/user.routes.ts';
 dotenv.config();
 
 if (!process.env.PORT) {
@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(helmet());
 
-app.use('/api', userRouter)
+app.use('/api', userRouter);
 
 app.listen(PORT, () => {
 	console.log(`Server is listening on port ${PORT}`);

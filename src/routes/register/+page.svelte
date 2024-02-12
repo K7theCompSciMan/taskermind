@@ -17,18 +17,30 @@
             alert("Passwords do not match");
             return;
         }
-        const response = await fetch('http://168.9.35.208:7000/api/register', {
+        console.log({
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
+                username,
                 email,
-                password
+                password,
+                tasks: []
+            })});
+        const response = await fetch('http://localhost:7000/api/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username,
+                email,
+                password,
+                tasks: []
             })
         });
-        const data = await response.json();
-        console.log(data);
+        console.log(response);
 
     }
 </script>

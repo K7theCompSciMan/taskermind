@@ -31,7 +31,8 @@ userRouter.get('/user/:id', async (req: Request, res: Response) => {
 
 userRouter.post('/register', async (req: Request, res: Response) => {
 	try {
-		const { id, username, email, password } = req.body;
+		const { username, email, password, tasks } = req.body;
+		let id = (await db.getUsers()).length;
 		if (!id || !username || !email || !password) {
 			return res.status(StatusCodes.BAD_REQUEST).send('Invalid input');
 		}
