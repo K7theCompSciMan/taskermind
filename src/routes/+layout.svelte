@@ -22,6 +22,7 @@
         {name: "Events", path: "/events", onHover: () => eventsDropdown = true, leave: () => eventsDropdown = false},
         {name: "Timeline", path: "/timeline", onHover: () => timelineDropdown = true, leave: () => timelineDropdown = false},
         {name: "Login", path: "/login", onHover: () => {}, leave: () => {}},
+        {name: "Sign Up", path: "/register", onHover: () => {}, leave: () => {}},
     ]
 </script>    
 <div class="bg-green-500 h-screen w-full overflow-auto">

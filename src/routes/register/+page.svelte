@@ -60,9 +60,9 @@
             <input type="password" required placeholder="Password" bind:value={password} class="rounded-3xl  p-2 bg-transparent border-2 border-emerald-700 placeholder-slate-100">
         </div>
         <div class="m-4">
-            <input type="password" required placeholder="confirm password" bind:value={confirmed} class="rounded-3xl  p-2 bg-transparent border-2 border-emerald-700 placeholder-slate-100">
+            <input type="password" required placeholder="Confirm Password" bind:value={confirmed} class="rounded-3xl  p-2 bg-transparent border-2 border-emerald-700 placeholder-slate-100">
         </div>
-        <div class="m-4">
+        <div class="m-4 justify-center flex">
             <Button type= "submit" name="Register" size="w-56" onclick={() => onclick()} hover={() => {}} leave={() => {}}/>
         </div>
     </div>
