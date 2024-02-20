@@ -118,7 +118,7 @@ ul {list-style-type: none;}
 	/* Highlight the "current" day */
 	.active {
 		padding: 5px;
-		background: #1abc9c;
+		background: #2bffd5;
 		color: white !important
 	}
 
