@@ -1,5 +1,10 @@
-<script>
+<!-- import { CalendarView } from "fluent-svelte"; -->
 
+<script>
+    
+    // import { Button, CalendarView } from "fluent-svelte";
+
+    let value = new Date(); // The current date
 </script>
 
 <style>
@@ -7,7 +12,6 @@
 .center-box {
     display: flex; /* Use flexbox for layout */
     justify-content: center; /* Center the content horizontally */
-    align-items: center; /* Center the content vertically */
     height: 100vh; /* Take up full viewport height */
 }
 
@@ -34,7 +38,27 @@
 
 <div class="center-box">
 <div class="content">
-    <div class="part">Part 1</div>
-    <div class="part">Part 2</div>
+    <div class="part">
+        <h1> Task Information</h1>
+        <br>
+        <form>
+            <label for="nameTask">Task Name:</label><br>
+            <input type="text" id="nameTask" name="nameTask"><br>
+            <label for="Due Date">Due Date</label><br>
+            <input type = "date" id = "dueDate" name = "dueDate"><br>
+            <label for="description">Description:</label><br>
+            <input type="text" id="description" name="description"><br>
+            <label for="priority">Priority:</label><br>
+            <input type="text" id="priority" name="priority"><br>
+            
+
+
+
+            <br>
+            <input type = "submit" value = "Submit">
+        </form>
+
+    </div>
+    <div class="part">Calendar</div>
 </div>
 </div>
