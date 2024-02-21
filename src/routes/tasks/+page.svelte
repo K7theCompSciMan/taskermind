@@ -33,12 +33,14 @@
 .form-popup {
   display: none;
   position: fixed;
-  /* bottom: 0;
-  right: 15px; */
+  bottom: 23px;
+  right: 15px; 
+  width: 200px;
   justify-content: center;
   justify-self: center;
-  border: 3px solid #f1f1f1;
+  border: 3px solid #000000;
   z-index: 9;
+
 }
 
 /* Add styles to the form container */
