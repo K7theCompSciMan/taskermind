@@ -18,6 +18,16 @@
   right: 28px;
   width: 280px; */
 }
+.cancel {
+  width: 100%;
+  padding: 16px 20px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+
+}
 
 /* The popup form - hidden by default */
 .form-popup {
@@ -94,7 +104,7 @@
 		<br>
 		<input type = "submit" value = "Submit">
 	</form>
-	<button class="btn cancel" on:click={closeForm}>Close</button>
+	<button class="cancel" on:click={closeForm}>Close</button>
 
 </div>
     
