@@ -35,6 +35,8 @@
   position: fixed;
   /* bottom: 0;
   right: 15px; */
+  justify-content: center;
+  justify-self: center;
   border: 3px solid #f1f1f1;
   z-index: 9;
 }
