@@ -23,10 +23,19 @@
   padding: 16px 20px;
   background-color: #f44336;
   color: white;
-  border: none;
+  border: black 2px solid;
   cursor: pointer;
   opacity: 0.8;
 
+}
+.submit {
+  width: 100%;
+  padding: 16px 20px;
+  background-color: #04AA6D;
+  color: rgb(3, 255, 3);
+  border: black 2px solid;
+  cursor: pointer;
+  opacity: 0.8;
 }
 
 /* The popup form - hidden by default */
@@ -88,7 +97,6 @@
 }
 </style>
 <button class="open-button" on:click={openForm}>Add Task</button>
-
 <div class="form-popup" id="myForm">
 	<h1> Task Information</h1>
 	<br>
@@ -105,9 +113,9 @@
 
 
 
-		<br>
-		<input type = "submit" value = "Submit">
+	
 	</form>
+  <button class="btn" type="submit" on:click={() => {closeForm(); formStuff()}}>Add Task</button>
 	<button class="cancel" on:click={closeForm}>Close</button>
 
 </div>
@@ -122,4 +130,13 @@
 	  const form = document.getElementById("myForm");
 	  if (form) form.style.display = "none";
 	}
+
+  function formStuff(){
+    var names = document.getElementById("nameTask");
+    var dueData = document.getElementById("dueDate");
+    var des = document.getElementById("description");
+    var priority = document.getElementById("priority");
+    alert("All Data is Saved");
+
+  }
 </script>
