@@ -102,25 +102,30 @@
 	<br>
 	<form>
 		<label for="nameTask">Task Name:</label><br>
-		<input type="text" id="nameTask" name="nameTask"><br>
+		<input type="text" id="nameTask" name="nameTask" bind:value={name}><br>
 		<label for="Due Date">Due Date</label><br>
-		<input type = "date" id = "dueDate" name = "dueDate"><br>
+		<input type = "date" id = "dueDate" name = "dueDate"bind:value={dueDate}><br>
 		<label for="description">Description:</label><br>
-		<input type="text" id="description" name="description"><br>
+		<input type="text" id="description" name="description"bind:value={des}><br>
 		<label for="priority">Priority:</label><br>
-		<input type="text" id="priority" name="priority"><br>
+		<input type="text" id="priority" name="priority"bind:value={priority}><br>
 		
 
 
 
 	
 	</form>
-  <button class="btn" type="submit" on:click={() => {closeForm(); formStuff()}}>Add Task</button>
+  <button class="btn" type="submit" on:click={closeForm}>Add Task</button>
 	<button class="cancel" on:click={closeForm}>Close</button>
 
 </div>
     
-<script>
+<script lang="ts">
+  let name:string;
+  let dueDate: string;
+  let des: string;
+  let priority: string;
+  let completed: boolean;
 	function openForm() {
 	  const form = document.getElementById("myForm");
 	  if (form) form.style.display = "block";
@@ -131,12 +136,30 @@
 	  if (form) form.style.display = "none";
 	}
 
-  function formStuff(){
-    var names = document.getElementById("nameTask");
-    var dueData = document.getElementById("dueDate");
-    var des = document.getElementById("description");
-    var priority = document.getElementById("priority");
-    alert("All Data is Saved");
+
+
+  
+  import Button from '$lib/Button.svelte';
+  let email: string;
+  let password: string;
+  const onclick = async () => {
+    completed = false;
+      const response = await fetch('localhost:7000/api/task', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+              name,
+              dueDate,
+              des,
+              priority,
+              completed
+          })
+      });
+      const data = await response.json();
+      
+      console.log(data);
 
   }
 </script>
