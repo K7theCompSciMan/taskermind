@@ -3,7 +3,7 @@
     let email: string;
     let password: string;
     const onclick = async () => {
-        const response = await fetch('localhost:7000/api/login', {
+        const response = await fetch('https://taskermind-api.fly.dev/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -19,6 +19,7 @@
 
     }
 </script>
+
 <div class="flex justify-center">
     <form action="">
     <div class="justify-center text-center w-[22rem] bg-blue-500 rounded-2xl m-4 shadow-2xl pt-2">
