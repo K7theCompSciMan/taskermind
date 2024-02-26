@@ -32,7 +32,7 @@
   width: 100%;
   padding: 16px 20px;
   background-color: #04AA6D;
-  color: green;
+  color: rgb(3, 255, 3);
   border: none;
   cursor: pointer;
   opacity: 0.8;
