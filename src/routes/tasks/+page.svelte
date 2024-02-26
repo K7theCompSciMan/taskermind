@@ -28,6 +28,15 @@
   opacity: 0.8;
 
 }
+.submit {
+  width: 100%;
+  padding: 16px 20px;
+  background-color: #04AA6D;
+  color: green;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+}
 
 /* The popup form - hidden by default */
 .form-popup {
@@ -105,9 +114,9 @@
 
 
 
-		<br>
-		<input type = "submit" value = "Submit">
+	
 	</form>
+  <button class="btn" type="submit" on:click={closeForm}>Add Task</button>
 	<button class="cancel" on:click={closeForm}>Close</button>
 
 </div>
