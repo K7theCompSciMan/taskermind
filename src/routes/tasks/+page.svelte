@@ -115,7 +115,7 @@
 
 	
 	</form>
-  <button class="btn" type="submit" on:click={closeForm}>Add Task</button>
+  <button class="btn" type="submit" on:click={() => {closeForm(); formStuff()}}>Add Task</button>
 	<button class="cancel" on:click={closeForm}>Close</button>
 
 </div>
