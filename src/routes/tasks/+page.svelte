@@ -130,4 +130,13 @@
 	  const form = document.getElementById("myForm");
 	  if (form) form.style.display = "none";
 	}
+
+  function formStuff(){
+    var names = document.getElementById("nameTask");
+    var dueData = document.getElementById("dueDate");
+    var des = document.getElementById("description");
+    var priority = document.getElementById("priority");
+    alert("All Data is Saved");
+
+  }
 </script>
