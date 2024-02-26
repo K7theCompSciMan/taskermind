@@ -23,7 +23,7 @@
   padding: 16px 20px;
   background-color: #f44336;
   color: white;
-  border: none;
+  border: black 2px solid;
   cursor: pointer;
   opacity: 0.8;
 
@@ -33,7 +33,7 @@
   padding: 16px 20px;
   background-color: #04AA6D;
   color: rgb(3, 255, 3);
-  border: none;
+  border: black 2px solid;
   cursor: pointer;
   opacity: 0.8;
 }
