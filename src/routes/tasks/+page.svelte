@@ -97,7 +97,6 @@
 }
 </style>
 <button class="open-button" on:click={openForm}>Add Task</button>
-
 <div class="form-popup" id="myForm">
 	<h1> Task Information</h1>
 	<br>
