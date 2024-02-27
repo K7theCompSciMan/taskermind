@@ -35,11 +35,10 @@
                 <div class="active-element"></div>
             </div>
             {/each}
+            <Heading logo={true} {src} onclick={() => goto("/")} size="w-56"/>
         </nav>
     </center>
-    <right>
-        <h1>Login Button</h1>
-    </right>
+
     <!-- {#if aboutDropdown}
     <div></div>
     {:else if tasksDropdown}
