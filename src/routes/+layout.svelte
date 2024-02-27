@@ -37,6 +37,9 @@
             {/each}
         </nav>
     </center>
+    <right>
+        <h1>Login Button</h1>
+    </right>
     <!-- {#if aboutDropdown}
     <div></div>
     {:else if tasksDropdown}
