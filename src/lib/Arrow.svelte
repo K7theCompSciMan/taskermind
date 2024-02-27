@@ -13,7 +13,7 @@
 		height: 3rem;
 		padding: 12px;
 		cursor: pointer;
-        border: 1px solid black;
+        border: 2px solid black;
         border-radius: 100px;
 	}
 	
