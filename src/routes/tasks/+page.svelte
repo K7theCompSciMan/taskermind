@@ -97,7 +97,7 @@
 }
 
 .showtasks {
-  
+  justify-self: center;
   justify-content: center;
   text-align: center;
   flex-direction: column;
