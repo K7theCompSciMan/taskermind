@@ -95,6 +95,18 @@
 .form-container .btn:hover, .open-button:hover {
   opacity: 1;
 }
+
+.showtasks {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-color: #f1f1f1;
+  border: 3px solid #000000;
+  z-index: 9;
+}
 </style>
 <button class="open-button" on:click={openForm}>Add Task</button>
 <div class="form-popup" id="myForm">
@@ -118,6 +130,9 @@
   <button class="btn" type="submit" on:click={() => onclick()} on:click={closeForm}>Add Task</button>
 	<button class="cancel" on:click={closeForm}>Close</button>
 
+</div>
+<div class = "showtasks" id = "view">
+  <h1> this is a place holder</h1>
 </div>
     
 <script lang="ts">
