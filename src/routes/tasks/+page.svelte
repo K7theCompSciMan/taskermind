@@ -51,7 +51,7 @@
   background-color:rgb(59, 130, 246);
   z-index: 9;
   border-radius: 2px;
-  box-shadow: 10px 10px 5px 12px white;
+  box-shadow: 5px 5px 5px 5px lightblue;
 
 }
 
@@ -109,7 +109,7 @@
   background-color: rgb(59, 130, 246);
   border-radius: 1rem;
   margin: 1rem;
-  box-shadow: 10px 10px 5px 12px white;
+  box-shadow: 5px 5px 5px 5px lightblue;
   padding-top: 0.5rem/* 8px */;
 
 }
