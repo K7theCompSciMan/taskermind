@@ -48,6 +48,7 @@
   justify-content: center;
   justify-self: center;
   border: 3px solid #000000;
+  background-color: #f1f1f1;
   z-index: 9;
 
 }
