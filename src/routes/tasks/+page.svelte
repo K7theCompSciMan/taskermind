@@ -111,7 +111,7 @@
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
   padding-top: 0.5rem/* 8px */;
 
-.input {
+.input [type=text]{
   width: 100%;
   padding: 15px;
   margin: 5px 0 22px 0;
