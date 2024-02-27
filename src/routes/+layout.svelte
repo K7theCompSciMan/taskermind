@@ -4,6 +4,7 @@
     import { goto } from "$app/navigation";
     import Button from "$lib/Button.svelte";
     import src from '$lib/images/logo.jpeg'
+    import peep from '$lib/images/download.png'
 
     type Page = {
         name: string;
@@ -35,7 +36,7 @@
                 <div class="active-element"></div>
             </div>
             {/each}
-            <Heading logo={true} {src} onclick={() => goto("/")} size="w-56"/>
+            <Heading loginGood={true} src={peep} onclick={() => goto("/")} size="w-56"/>
         </nav>
     </center>
 

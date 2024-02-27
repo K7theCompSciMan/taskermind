@@ -7,12 +7,14 @@
     export let style = " ";
     export let logo: boolean = false;
     export let src: string = "";
+    export let loginGood: boolean = false;
     export let onclick: () => void = () => {};
 </script>
 
 {#if logo}
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+    <img {src} alt="TaskerMind Logo" class="w-20 h-20 m-2 rounded-3xl hover:cursor-pointer" on:click={() =>onclick()}/>
     <img {src} alt="TaskerMind Logo" class="w-20 h-20 m-2 rounded-3xl hover:cursor-pointer" on:click={() =>onclick()}/>
 {:else}
 <!-- svelte-ignore a11y-click-events-have-key-events -->
