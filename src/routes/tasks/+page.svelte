@@ -13,10 +13,10 @@
   border: none;
   cursor: pointer;
   opacity: 0.8;
-  position: fixed;
-  /* bottom: 23px;
-  right: 28px;
-  width: 280px; */
+  position: relative;
+  top: -16px;
+  right: -706px;
+  
 }
 .cancel {
   width: 100%;
@@ -169,14 +169,25 @@ input [type=text]{
   let des: string;
   let priority: string;
   let completed: boolean;
+  let open:boolean;
+  open = false;
 	function openForm() {
-	  const form = document.getElementById("myForm");
-	  if (form) form.style.display = "block";
+    if(open){
+      open = false;
+      closeForm();
+    }
+    else{
+      const form = document.getElementById("myForm");
+      if (form) form.style.display = "block";
+      open =true;
+    }
+	
 	}
 	
 	function closeForm() {
 	  const form = document.getElementById("myForm");
 	  if (form) form.style.display = "none";
+    open = false;
 	}
 
 
