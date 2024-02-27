@@ -13,9 +13,10 @@
   border: none;
   cursor: pointer;
   opacity: 0.8;
-  position: relative;
-  top: -16px;
-  right: -706px;
+  position: absolute;
+  right: 100px;
+  size: 20px;
+  border-radius: 1rem;
   
 }
 .cancel {
