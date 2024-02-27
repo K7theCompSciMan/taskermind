@@ -9,10 +9,11 @@
 
 <style>
 	svg {
-		width: 5rem;
-		height: 5rem;
+		width: 3rem;
+		height: 3rem;
 		padding: 12px;
 		cursor: pointer;
+        border: 1px solid black;
 	}
 	
 	.left {
