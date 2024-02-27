@@ -115,7 +115,7 @@
 
 	
 	</form>
-  <button class="btn" type="submit" on:click={closeForm}>Add Task</button>
+  <button class="btn" type="submit" on:click={() => onclick()} on:click={closeForm}>Add Task</button>
 	<button class="cancel" on:click={closeForm}>Close</button>
 
 </div>
@@ -140,8 +140,6 @@
 
   
   import Button from '$lib/Button.svelte';
-  let email: string;
-  let password: string;
   const onclick = async () => {
     completed = false;
       const response = await fetch('localhost:7000/api/task', {
