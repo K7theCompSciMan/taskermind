@@ -9,8 +9,8 @@
 
 <style>
 	svg {
-		width: 2rem;
-		height: 2rem;
+		width: 5rem;
+		height: 5rem;
 		padding: 12px;
 		cursor: pointer;
 	}
