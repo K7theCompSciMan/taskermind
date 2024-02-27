@@ -48,7 +48,7 @@
   justify-content: center;
   justify-self: center;
   border: 3px solid #000000;
-  background-color: #f1f1f1;
+  background-color:rgb(59, 130, 246);
   z-index: 9;
   border-radius: 2px;
 
@@ -118,7 +118,7 @@
   border: 2px solid black;
   background: #f1f1f1;
   border-radius: 1rem;
-  
+
 
 }
 
