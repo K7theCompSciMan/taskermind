@@ -111,6 +111,17 @@
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
   padding-top: 0.5rem/* 8px */;
 
+.input {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: 2px solid black;
+  background: #f1f1f1;
+  border-radius: 1rem;
+  
+
+}
+
 
   
 }
