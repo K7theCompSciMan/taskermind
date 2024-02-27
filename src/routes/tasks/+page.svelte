@@ -97,6 +97,7 @@
 }
 
 .showtasks {
+  display: flex;
   justify-self: center;
   justify-content: center;
   text-align: center;
@@ -136,12 +137,14 @@
 
 </div>
 <div class="showtasks">
+    <div class="">  
     <h1>Tasks</h1>
-    <div>
-        <h2>Task 1</h2>
-        <p>Due Date: 12/12/2021</p>
-        <p>Description: This is a task</p>
-        <p>Priority: High</p>
+      <div>
+          <h2>Task 1</h2>
+          <p>Due Date: 12/12/2021</p>
+          <p>Description: This is a task</p>
+          <p>Priority: High</p>
+      </div>
     </div>
 </div>
     
