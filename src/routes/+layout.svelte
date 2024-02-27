@@ -25,34 +25,6 @@
         {name: "Sign Up", path: "/register", onHover: () => {}, leave: () => {}},
     ]
 </script>   
-<style>
-
-    nav:before{
-        content: "";
-        position: absolute;
-        inset: 40% -60% 0 -60%;
-        opacity: 0.3;
-        pointer-events: none;
-
-    }
-    nav{
-        position: relative;
-        z-index:1;
-
-    }
-    .active-element{
-        position: absolute;
-        bottom: 0;
-        height: 4px;
-        background-color: #fff;
-        width: 100%;
-        transform: scaleX(0);
-        transition: transform 0.3s ease-in-out;
-    }
-    .button:hover ~ .active-element, .active-element:hover {
-        transform: scaleX(1);
-    }
-</style> 
 <div class="bg-green-500 h-screen w-full overflow-auto " id="nav">
     <center>
                    <nav class="flex justify-center items-center text-center bg-sky-600 align-middle shadow-2xl rounded-b-2xl mb-4 w-full h-fit overflow-auto relative">
