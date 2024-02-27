@@ -24,10 +24,29 @@
         {name: "Login", path: "/login", onHover: () => {}, leave: () => {}},
         {name: "Sign Up", path: "/register", onHover: () => {}, leave: () => {}},
     ]
-</script>    
+</script>   
+<style>
+
+    body:before{
+        content: "";
+        position: absolute;
+        inset: 40% -60% 0 -60%;
+        opacity: 0.3;
+        pointer-events: none;
+
+    }
+    nav{
+        position: relative;
+        z-index:1;
+
+    }
+    nav.before .active-element{
+        transform: rotateY(180deg)
+    }
+</style> 
 <div class="bg-green-500 h-screen w-full overflow-auto">
     <center>
-            <nav class="flex justify-center items-center text-center bg-sky-600 align-middle shadow-2xl rounded-b-2xl mb-4 w-full h-fit overflow-auto">
+            <nav class="active flex justify-center items-center text-center bg-sky-600 align-middle shadow-2xl rounded-b-2xl mb-4 w-full h-fit overflow-auto">
             <Heading logo={true} {src} onclick={() => goto("/")}/>
             {#each pages as page}
             <Button name={page.name} onclick={() => goto(page.path)} hover={page.onHover} leave={page.leave}/>
