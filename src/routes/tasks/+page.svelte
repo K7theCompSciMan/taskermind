@@ -97,15 +97,11 @@
 }
 
 .showtasks {
-  display: flex;
+  
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 30;
-  height: 40;
-  background-color: #05e391;
-  border: 3px solid #000000;
-  z-index: 9;
+  
 }
 </style>
 <button class="open-button" on:click={openForm}>Add Task</button>
@@ -131,8 +127,42 @@
 	<button class="cancel" on:click={closeForm}>Close</button>
 
 </div>
-<div class = "showtasks" id = "view">
-  <h1> this is a place holder</h1>
+<div class="justify-center text-center w-[22rem] bg-blue-500 rounded-2xl m-4 shadow-2xl pt-2">
+  <div class="m-2 font-bold text-2xl ">
+    Your Tasks
+  </div>
+  <div class="m-4 mt-6">
+    <div class="showtasks">
+      <p>Task 1</p>
+    </div>
+    <div class="showtasks">
+      <p>Task 2</p>
+    </div>
+    <div class="showtasks">
+      <p>Task 3</p>
+    </div>
+    <div class="showtasks">
+      <p>Task 4</p>
+    </div>
+    <div class="showtasks">
+      <p>Task 5</p>
+    </div>
+    <div class="showtasks">
+      <p>Task 6</p>
+    </div>
+    <div class="showtasks">
+      <p>Task 7</p>
+    </div>
+    <div class="showtasks">
+      <p>Task 8</p>
+    </div>
+    <div class="showtasks">
+      <p>Task 9</p>
+    </div>
+    <div class="showtasks">
+      <p>Task 10</p>
+    </div>
+  </div>
 </div>
     
 <script lang="ts">
