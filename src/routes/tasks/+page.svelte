@@ -101,9 +101,9 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 100%;
-  height: 100%;
-  background-color: #f1f1f1;
+  width: 30;
+  height: 40;
+  background-color: #05e391;
   border: 3px solid #000000;
   z-index: 9;
 }
