@@ -99,8 +99,16 @@
 .showtasks {
   
   justify-content: center;
-  align-items: center;
+  text-align: center;
   flex-direction: column;
+  width: 352px;
+  background-color: rgb(59, 130, 246);
+  border-radius: 1rem;
+  margin: 1rem;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  padding-top: 0.5rem/* 8px */;
+
+
   
 }
 </style>
@@ -127,42 +135,14 @@
 	<button class="cancel" on:click={closeForm}>Close</button>
 
 </div>
-<div class="justify-center text-center w-[22rem] bg-blue-500 rounded-2xl m-4 shadow-2xl pt-2">
-  <div class="m-2 font-bold text-2xl ">
-    Your Tasks
-  </div>
-  <div class="m-4 mt-6">
-    <div class="showtasks">
-      <p>Task 1</p>
+<div class="showtasks">
+    <h1>Tasks</h1>
+    <div>
+        <h2>Task 1</h2>
+        <p>Due Date: 12/12/2021</p>
+        <p>Description: This is a task</p>
+        <p>Priority: High</p>
     </div>
-    <div class="showtasks">
-      <p>Task 2</p>
-    </div>
-    <div class="showtasks">
-      <p>Task 3</p>
-    </div>
-    <div class="showtasks">
-      <p>Task 4</p>
-    </div>
-    <div class="showtasks">
-      <p>Task 5</p>
-    </div>
-    <div class="showtasks">
-      <p>Task 6</p>
-    </div>
-    <div class="showtasks">
-      <p>Task 7</p>
-    </div>
-    <div class="showtasks">
-      <p>Task 8</p>
-    </div>
-    <div class="showtasks">
-      <p>Task 9</p>
-    </div>
-    <div class="showtasks">
-      <p>Task 10</p>
-    </div>
-  </div>
 </div>
     
 <script lang="ts">
