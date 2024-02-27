@@ -20,7 +20,7 @@
         {name: "About", path: "/about", onHover: () => aboutDropdown = true, leave: () => aboutDropdown = false},
         {name: "Tasks", path: "/tasks", onHover: () => tasksDropdown = true, leave: () => tasksDropdown = false},
         {name: "Events", path: "/events", onHover: () => eventsDropdown = true, leave: () => eventsDropdown = false},
-        {name: "Timeline", path: "/timeline", onHover: () => timelineDropdown = true, leave: () => timelineDropdown = false},
+        {name: "Calendar", path: "/calendar", onHover: () => timelineDropdown = true, leave: () => timelineDropdown = false},
         {name: "Login", path: "/login", onHover: () => {}, leave: () => {}},
         {name: "Sign Up", path: "/register", onHover: () => {}, leave: () => {}},
     ]
