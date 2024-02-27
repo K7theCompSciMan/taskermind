@@ -19,15 +19,15 @@
     let pages: Page[] = [
         {name: "About", path: "/about", onHover: () => aboutDropdown = true, leave: () => aboutDropdown = false},
         {name: "Tasks", path: "/tasks", onHover: () => tasksDropdown = true, leave: () => tasksDropdown = false},
+        {name: "Events", path: "/events", onHover: () => tasksDropdown = true, leave: () => tasksDropdown = false},
         {name: "Calendar", path: "/calendar", onHover: () => calendarDropdown = true, leave: () => calendarDropdown = false},
-        {name: "Timeline", path: "/timeline", onHover: () => timelineDropdown = true, leave: () => timelineDropdown = false},
         {name: "Login", path: "/login", onHover: () => {}, leave: () => {}},
         {name: "Sign Up", path: "/register", onHover: () => {}, leave: () => {}},
     ]
 </script>   
 <style>
 
-    body:before{
+    nav:before{
         content: "";
         position: absolute;
         inset: 40% -60% 0 -60%;
@@ -40,17 +40,29 @@
         z-index:1;
 
     }
-    nav.before .active-element{
-        transform: rotateY(180deg)
+    .active-element{
+        position: absolute;
+        bottom: 0;
+        height: 4px;
+        background-color: #fff;
+        width: 100%;
+        transform: scaleX(0);
+        transition: transform 0.3s ease-in-out;
+    }
+    .button:hover ~ .active-element, .active-element:hover {
+        transform: scaleX(1);
     }
 </style> 
-<div class="bg-green-500 h-screen w-full overflow-auto">
+<div class="bg-green-500 h-screen w-full overflow-auto " id="nav">
     <center>
-            <nav class="active flex justify-center items-center text-center bg-sky-600 align-middle shadow-2xl rounded-b-2xl mb-4 w-full h-fit overflow-auto">
-            <Heading logo={true} {src} onclick={() => goto("/")}/>
+                   <nav class="flex justify-center items-center text-center bg-sky-600 align-middle shadow-2xl rounded-b-2xl mb-4 w-full h-fit overflow-auto relative">
+            <Heading logo={true} {src} onclick={() => goto("/")} size="w-56"/>
             {#each pages as page}
-            <Button name={page.name} onclick={() => goto(page.path)} hover={page.onHover} leave={page.leave}/>
-                {/each}
+            <div class="relative button">
+                <Button name={page.name} onclick={() => goto(page.path)} hover={page.onHover} leave={page.leave}/>
+                <div class="active-element"></div>
+            </div>
+            {/each}
         </nav>
     </center>
     <!-- {#if aboutDropdown}

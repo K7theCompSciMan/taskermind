@@ -13,10 +13,11 @@
   border: none;
   cursor: pointer;
   opacity: 0.8;
-  position: fixed;
-  /* bottom: 23px;
-  right: 28px;
-  width: 280px; */
+  position: absolute;
+  right: 100px;
+  size: 20px;
+  border-radius: 1rem;
+  
 }
 .cancel {
   width: 100%;
@@ -51,6 +52,8 @@
   background-color:rgb(59, 130, 246);
   z-index: 9;
   border-radius: 2px;
+  box-shadow: 5px 5px 5px 5px lightblue;
+
 
 }
 
@@ -108,8 +111,9 @@
   background-color: rgb(59, 130, 246);
   border-radius: 1rem;
   margin: 1rem;
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  box-shadow: 5px 5px 5px 5px lightblue;
   padding-top: 0.5rem/* 8px */;
+
 }
 input [type=text]{
   width: 100%;
@@ -167,14 +171,25 @@ input [type=text]{
   let des: string;
   let priority: string;
   let completed: boolean;
+  let open:boolean;
+  open = false;
 	function openForm() {
-	  const form = document.getElementById("myForm");
-	  if (form) form.style.display = "block";
+    if(open){
+      open = false;
+      closeForm();
+    }
+    else{
+      const form = document.getElementById("myForm");
+      if (form) form.style.display = "block";
+      open =true;
+    }
+	
 	}
 	
 	function closeForm() {
 	  const form = document.getElementById("myForm");
 	  if (form) form.style.display = "none";
+    open = false;
 	}
 
 
