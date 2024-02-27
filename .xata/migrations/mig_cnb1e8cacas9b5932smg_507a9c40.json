@@ -1,0 +1,19 @@
+{
+  "id": "mig_cnb1e8cacas9b5932smg",
+  "parentID": "mig_cnb1e5kacas9b5932slg",
+  "checksum": "1:507a9c40aec141c3116ef6026f726d1754832966b9b4b28426d279425c7cdfb0",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "user",
+          "type": "link",
+          "link": {
+            "table": "user"
+          }
+        },
+        "table": "task"
+      }
+    }
+  ]
+}

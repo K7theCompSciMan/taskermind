@@ -1,0 +1,12 @@
+{
+  "id": "mig_cneasqfh5qh9noi3kjqg",
+  "parentID": "mig_cneaslnh5qh9noi3kjpg",
+  "checksum": "1:0e4bbb851f3c0c76ee4f883a07ab927c14a71d07f3ab0a98c0b42e055ba270d8",
+  "operations": [
+    {
+      "removeTable": {
+        "table": "tasks"
+      }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "id": "mig_cnb1e4cacas9b5932skg",
+  "parentID": "mig_cnb1dshkav7innvrdisg",
+  "checksum": "1:ce475b68f3af8d92c3078b2c335e1a1cbc6b85410d460c653ed97470af932c7d",
+  "operations": [
+    {
+      "renameColumn": {
+        "newName": "name",
+        "oldName": "title",
+        "table": "task"
+      }
+    }
+  ]
+}

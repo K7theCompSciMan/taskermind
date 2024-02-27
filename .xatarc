@@ -1,0 +1,6 @@
+{
+  "databaseURL": "https://TaskerMind-uegtlp.us-east-1.xata.sh/db/api",
+  "codegen": {
+    "output": "src/xata.ts"
+  }
+}
