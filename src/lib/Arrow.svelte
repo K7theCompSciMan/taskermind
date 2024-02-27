@@ -14,7 +14,7 @@
 		padding: 12px;
 		cursor: pointer;
         border: 1px solid black;
-        border-radius: 5px;
+        border-radius: 100px;
 	}
 	
 	.left {
