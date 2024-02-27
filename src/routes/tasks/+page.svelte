@@ -109,8 +109,9 @@
   background-color: rgb(59, 130, 246);
   border-radius: 1rem;
   margin: 1rem;
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  box-shadow: 10px 10px 5px 12px white;
   padding-top: 0.5rem/* 8px */;
+
 }
 input [type=text]{
   width: 100%;
