@@ -107,7 +107,7 @@
 		display: block;
 		text-align: center;
 		text-transform: uppercase;
-        font-weight: 900;
+        font-weight: bold;
 		font-size: 140%;
 		margin: 0 1rem;
 	}
@@ -123,6 +123,7 @@
 		font-weight: 300;
 		text-align: center;
 		text-transform: uppercase;
+        font-weight: 900;
 		margin-bottom: 0.5rem;
 		opacity: 0.6;
 	}
