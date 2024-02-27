@@ -107,6 +107,7 @@
 		display: block;
 		text-align: center;
 		text-transform: uppercase;
+        font-weight: 900;
 		font-size: 140%;
 		margin: 0 1rem;
 	}
