@@ -1,4 +1,4 @@
-<!-- import { CalendarView } from "fluent-svelte"; -->
+
 
 <style>
 
@@ -110,7 +110,7 @@
   margin: 1rem;
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
   padding-top: 0.5rem/* 8px */;
-
+}
 input [type=text]{
   width: 100%;
   padding: 15px;
@@ -124,7 +124,7 @@ input [type=text]{
 
 
   
-}
+
 </style>
 <button class="open-button" on:click={openForm}>Add Task</button>
 <div class="form-popup" id="myForm">
