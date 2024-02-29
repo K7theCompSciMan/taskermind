@@ -28,7 +28,7 @@
 </script>   
 <div class="bg-green-500 h-screen w-full overflow-auto " id="nav">
     <center>
-                   <nav class="flex justify-center items-center text-center bg-sky-600 align-middle shadow-2xl rounded-b-2xl mb-4 w-full h-fit overflow-auto relative">
+        <nav class="flex justify-center items-center text-center bg-sky-600 align-middle shadow-2xl rounded-b-2xl mb-4 w-full h-fit overflow-auto relative">
             <Heading logo={true} {src} onclick={() => goto("/")} size="w-56"/>
             {#each pages as page}
             <div class="relative button">
@@ -36,7 +36,7 @@
                 <div class="active-element"></div>
             </div>
             {/each}
-            <Heading loginGood={true} src={peep} onclick={() => goto("/")} size="w-56"/>
+            <Heading logo={true} src={peep} onclick={() => goto("/")} size="w-56"/>
         </nav>
     </center>
 
