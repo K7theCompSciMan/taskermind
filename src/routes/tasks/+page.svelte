@@ -188,6 +188,9 @@ input [type=text]{
 	  const form = document.getElementById("myForm");
 	  if (form) form.style.display = "none";
     open = false;
+    if (form instanceof HTMLFormElement) {
+        form.reset();
+      }
 	}
 
 
@@ -205,8 +208,8 @@ input [type=text]{
           },
           body: JSON.stringify({
               name,
-              dueDate,
               des,
+              dueDate,
               priority,
               completed
           })
