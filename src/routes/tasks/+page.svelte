@@ -153,17 +153,15 @@ input [type=text]{
 	<button class="cancel" on:click={closeForm}>Close</button>
 
 </div>
-<div class="showtasks">
-    <div class="">  
-    <h1>Tasks</h1>
-      <div>
-          <h2>Task 1</h2>
-          <p>Due Date: 12/12/2021</p>
-          <p>Description: This is a task</p>
-          <p>Priority: High</p>
-      </div>
-    </div>
-</div>
+<Card>
+	<h1>Events</h1>
+	<div>
+		<h2>Event 1</h2>
+		<p>Due Date: 12/12/2021</p>
+		<p>Description: This is a task</p>
+		<p>Priority: High</p>
+	</div>
+</Card>
     
 <script lang="ts">
   let name:string;
@@ -194,11 +192,13 @@ input [type=text]{
 
 
 
+	import Card from '$lib/Card.svelte';
+
   
   import Button from '$lib/Button.svelte';
   const onclick = async () => {
     completed = false;
-      const response = await fetch('taskermind-api.fly.dev/task', {
+      const response = await fetch('taskermind-api.fly.dev/create', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json'
@@ -216,4 +216,6 @@ input [type=text]{
       console.log(data);
 
   }
+
+
 </script>

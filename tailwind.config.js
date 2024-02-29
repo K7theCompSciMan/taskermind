@@ -9,6 +9,7 @@ export default {
       'comsic-latte': '#F8F4E3', 
       'ash-gray': '#A2A392', 
       'wisteria': '#BDADEA',
+      'general' : '3B82F6'
     }},
     
   },
