@@ -198,7 +198,7 @@ input [type=text]{
   import Button from '$lib/Button.svelte';
   const onclick = async () => {
     completed = false;
-      const response = await fetch('taskermind-api.fly.dev/create', {
+      const response = await fetch('https://taskermind-api.fly.dev/create', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json'
