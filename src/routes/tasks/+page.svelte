@@ -134,7 +134,7 @@ input [type=text]{
 <div class="form-popup" id="myForm">
 	<h1> Task Information</h1>
 	<br>
-	<form>
+	<form id = "myForm">
 		<label for="nameTask">Task Name:</label><br>
 		<input type="text" id="nameTask" name="nameTask" bind:value={name}><br>
 		<label for="Due Date">Due Date</label><br>
@@ -198,7 +198,7 @@ input [type=text]{
   import Button from '$lib/Button.svelte';
   const onclick = async () => {
     completed = false;
-      const response = await fetch('https://taskermind-api.fly.dev/create', {
+      const response = await fetch('https://taskermind-api.fly.dev/task/create', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json'
@@ -214,6 +214,11 @@ input [type=text]{
       const data = await response.json();
       
       console.log(data);
+      const form = document.getElementById("myForm");
+      if (form instanceof HTMLFormElement) {
+        form.reset();
+      }
+
 
   }
 
