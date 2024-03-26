@@ -1,4 +1,5 @@
 <!-- <script>
+	import +layout from './../+layout.svelte';
 	import Calendar from '$lib/Calendar.svelte';
 	
 	const today = new Date;
@@ -9,34 +10,33 @@
 
 <Calendar {today} year={years} /> -->
 
-<script>
+<script lang="ts">
 
-window.onload = function() {
-    setPage();
-}
+let types: string[] = [];
 
-function setPage(){
-	var types = ["Assigned", "Started", "Submit", "Completed"];
+types = ["Assigned", "Started", "Submit", "Completed"];
 
-	for (var i = 0; i<types.length; i++){
-		let titles = document.createElement("div");
-		titles.id = i.toString(); // Convert the id to a string to fix the type error
-		titles.innerHTML = types[i];
-		titles.classList.add("types");
-		document.body.appendChild(titles); // Append the created div to the body to display it
-	}
-}
 
 
 </script>
 <style>
-
+.types{
+	font-size: 20px;
+	margin: 10px;
+	border: 2px solid black;
+	border-radius: 1rem;
+	padding: 10px;
+}
+.types-wrapper{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	
+	}
 </style>
 
-
-<body>
-	<h1 id="1"> <!-- Corrected the id assignment -->
-		Events
-	</h1>
-	
-</body>
+<div class="types-wrapper">
+{#each types as type}
+	<h1 class="types">{type}</h1>
+{/each}
+</div>
