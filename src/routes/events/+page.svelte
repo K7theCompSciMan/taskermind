@@ -11,12 +11,21 @@
 
 <script>
 
-var types = ["Assigned", "Started", "Submit", "Completed"];
-for (var i = 0; i<types.length; i++){
-	let titles = document.createElement("div");
-	titles.innerHTML = types[i];
-	titles.classList.add("types");
+window.onload = function() {
+    setPage();
+}
 
+function setPage(){
+	var types = ["Assigned", "Started", "Submit", "Completed"];
+
+
+	for (var i = 0; i<types.length; i++){
+		let titles = document.createElement("div");
+		titles.id = i;
+		titles.innerHTML = types[i];
+		titles.classList.add("types");
+
+	}
 }
 
 
@@ -27,6 +36,8 @@ for (var i = 0; i<types.length; i++){
 
 
 <body>
-	
+	<h1 id = 1>
+		Events
+	</h1>
 	
 </body>
