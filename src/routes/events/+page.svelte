@@ -18,13 +18,12 @@ window.onload = function() {
 function setPage(){
 	var types = ["Assigned", "Started", "Submit", "Completed"];
 
-
 	for (var i = 0; i<types.length; i++){
 		let titles = document.createElement("div");
-		titles.id = i;
+		titles.id = i.toString(); // Convert the id to a string to fix the type error
 		titles.innerHTML = types[i];
 		titles.classList.add("types");
-
+		document.body.appendChild(titles); // Append the created div to the body to display it
 	}
 }
 
@@ -36,7 +35,7 @@ function setPage(){
 
 
 <body>
-	<h1 id = 1>
+	<h1 id="1"> <!-- Corrected the id assignment -->
 		Events
 	</h1>
 	
