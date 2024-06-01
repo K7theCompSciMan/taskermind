@@ -8,7 +8,7 @@
     export let form: ActionData;
 </script>
 <svelte:head>
-	<title>Sign in • Conduit</title>
+	<title>Log in • Taskermind</title>
 </svelte:head>
 <div class="flex justify-center">
     <form use:enhance method="post">

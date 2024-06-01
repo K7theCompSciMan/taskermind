@@ -10,5 +10,11 @@
 	
  </script>
 
-<h1> welcome {$page.data.user.username}</h1>
+{#if $page.data.user}
+	<h1> welcome {$page.data.user.username}</h1>
+{:else}
+	<h1> welcome guest</h1>
+{/if}
+
+
 <Calendar {today} year={years} />

@@ -20,7 +20,7 @@ export const actions: Actions = {
 
 		const { email, password } = formData as { email: string; password: string };
 
-		const response = await fetch('http://localhost:7000/login', {
+		const response = await fetch('https://taskermind-api.fly.dev/login', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -38,8 +38,7 @@ export const actions: Actions = {
 		event.locals.user = user;
         event.locals.accessToken = accessToken;
 
-		console.log('User:', user)
-		console.log('Access Token:', accessToken)
+		
 		
 		// Set the cookie
 		event.cookies.set('refreshToken', refreshToken, {

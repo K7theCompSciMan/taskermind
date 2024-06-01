@@ -7,15 +7,15 @@ export const handle: Handle = async ({ event, resolve }) => {
 	if (cookies.get('refreshToken')) {
 		// Remove Bearer prefix
 		const refreshToken = cookies.get('refreshToken');
-		const response = await fetch('http://localhost:7000/session/refresh', {
+		const response = await fetch('https://taskermind-api.fly.dev/session/refresh', {
 			method: 'GET',
 			headers: {
 				'x-refresh': refreshToken
-			}
+			} as HeadersInit
 		});
 		const accessToken = (await response.json()).accessToken;
 		event.locals.accessToken = accessToken;
-		const res = await fetch('http://localhost:7000/session/user', {
+		const res = await fetch('https://taskermind-api.fly.dev/session/user', {
 			headers: {
 				authorization: `Bearer ${accessToken}`
 			}
@@ -24,6 +24,10 @@ export const handle: Handle = async ({ event, resolve }) => {
 		if (res.status === 200) {
 			event.locals.user = user;
 		}
+	}
+	else {
+		event.locals.user = null;
+		event.locals.accessToken = "";
 	}
 	return await resolve(event);
 };
