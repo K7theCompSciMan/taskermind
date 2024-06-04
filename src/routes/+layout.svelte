@@ -27,7 +27,6 @@
         {name: "Sign Up", path: "/register", onHover: () => {}, leave: () => {}},
     ]
     let loggedInPages: Page[] = [
-        {name: "About", path: "/about", onHover: () => aboutDropdown = true, leave: () => aboutDropdown = false},
         {name: "Tasks", path: "/tasks", onHover: () => tasksDropdown = true, leave: () => tasksDropdown = false},
         {name: "Events", path: "/events", onHover: () => tasksDropdown = true, leave: () => tasksDropdown = false},
         {name: "Calendar", path: "/calendar", onHover: () => calendarDropdown = true, leave: () => calendarDropdown = false},

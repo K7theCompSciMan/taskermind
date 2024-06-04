@@ -2,6 +2,8 @@
 	export let left = false;
 </script>
 
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-no-static-element-interactions -->
 <svg class:left on:click xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
 	<path fill="#c4d9fd" d="M0 256c0 141.2 114.8 256 256 256V0A256.3 256.3 0 000 256z"/>
 	<path fill="#c4d9fd" d="M256 0v512c141.2 0 256-114.8 256-256S397.2 0 256 0z"/>

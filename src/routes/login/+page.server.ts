@@ -14,7 +14,7 @@ export const actions: Actions = {
 
 		if (!formData.email || !formData.password) {
 			return fail(400, {
-				error: 'Missing email or password'
+				missing: true
 			});
 		}
 
@@ -28,8 +28,10 @@ export const actions: Actions = {
 			body: JSON.stringify({ email, password })
 		});
 		if (response.status !== 200) {
+			console.log("Login Failed")
 			return fail(401, {
-				response
+				email,
+				incorrect: true
 			});
 		}
 		const data = await response.json();
