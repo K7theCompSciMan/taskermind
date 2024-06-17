@@ -2,9 +2,9 @@
 	import Button from '$lib/Button.svelte';
 	import { page } from '$app/stores';
 	import type { Event } from '$lib/index';
-	import type { ActionData } from '../$types';
+	import type { ActionData } from './$types';
 	let events: Event[] = [];
-	events = $page.data.events;
+	$: events = $page.data.events;
 	let createEventDropdown = false;
 	const closeCreateEventDropdown = () => {
 		createEventDropdown = false;
@@ -12,8 +12,8 @@
 	const openCreateEventDropdown = () => {
 		createEventDropdown = true;
 	};
-	$: notdropdowndisplay = createEventDropdown ? 'hidden' : '';
-	$: dropdownDisplay = createEventDropdown ? 'flex' : 'hidden';
+	$: notdropdowndisplay = createEventDropdown ? 'opacity-0' : 'opacity-100';
+	$: dropdownDisplay = createEventDropdown ? 'opacity-100' : 'opacity-0';
 	console.log($page.data.events)
 	if (!events) {
 		events = [];
@@ -23,7 +23,7 @@
 </script>
 
 <Button name="Create Event" onclick={openCreateEventDropdown} size="w-40 {notdropdowndisplay}" />
-<div class="{notdropdowndisplay} flex flex-col md:flex-row border">
+<div class="{notdropdowndisplay} flex flex-col md:flex-row border absolute left-[12.5%] w-fit h-fit">
 	{#each events as event}
 		<div class="border w-[75%] h-[75%] pl-2 flex-col items-center ml-[12.5%]">
 			<h1 class="font-bold text-2xl text-blue-500 border w-fit h-fit p-2 m-2 mb-8 relative">
@@ -35,7 +35,7 @@
 		</div>
 	{/each}
 </div>
-<div class="w-[75%] h-[75%] border pl-2 {dropdownDisplay} flex-col items-center ml-[12.5%]">
+<div class="flex absolute w-[75%] h-[75%] border pl-2 {dropdownDisplay} flex-col items-center ml-[12.5%] transition-opacity delay-100 bg-gray-500 rounded-2xl shadow-2xl">
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<svg
@@ -44,15 +44,15 @@
 		viewBox="0 0 24 24"
 		stroke-width="1.5"
 		stroke="currentColor"
-		class="size-8 absolute right-[12.5%] cursor-pointer hover:text-red-500 transition"
+		class="size-8 absolute right-0 cursor-pointer hover:text-red-500 transition"
 		on:click={closeCreateEventDropdown}
 	>
 		<path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
 	</svg>
-	<h1 class="font-bold text-2xl text-blue-500 border w-fit h-fit p-2 m-2 mb-8 relative">
+	<h1 class="font-bold text-2xl text-cyan-500 w-fit h-fit p-2 m-2 mb-8 relative">
 		Create a new Event!
 	</h1>
-	<form action="?/create" method="POST" class="border w-fit p-10">
+	<form action="?/create" method="POST" class="border rounded-xl w-fit p-10 bg-teal-500">
 		<div class="flex justify-center align-self-center">
 			{#if form?.error}<p class=" text-red-700 font-bold">{form?.error}</p>{/if}
 		</div>

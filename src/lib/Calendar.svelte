@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
 	function calendarize(target:Date , offset: number) {
   var i = 0,j = 0,week,out = [],date = new Date(target || new Date());
   var year = date.getFullYear(),month = date.getMonth();
@@ -147,4 +147,4 @@
 	.date.other {
 		opacity: 0.2;
 	}
-</style>
+</style> -->
