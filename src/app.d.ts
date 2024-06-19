@@ -8,7 +8,7 @@ declare global {
 		// interface Error {}
 		interface Locals {
 			accessToken: string;
-			user: SessionUser;
+			user: SessionUser | null;
 		}
 		// interface PageData {
 		// 	events: Event[];

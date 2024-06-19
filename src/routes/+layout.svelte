@@ -40,7 +40,7 @@
 
     {#if $page.data.user}
     <center>
-        <nav class="flex justify-center items-center text-center bg-sky-600 align-middle shadow-2xl rounded-b-2xl mb-4 w-full h-fit overflow-auto relative">
+        <nav class="flex justify-center items-center text-center bg-sky-600 align-middle shadow-2xl rounded-b-2xl mb-4 w-fit pl-[12.5%] pr-[12.5%] h-fit overflow-auto relative">
             <Heading logo={true} {src} onclick={() => goto("/")} size="w-56"/>
             {#each loggedInPages as page}
             <div class="relative button">

@@ -6,4 +6,6 @@ export type SessionUser = {
     id: string;
     email: string;
     username: string;
+    settings: any;
+    tags: any;
 }

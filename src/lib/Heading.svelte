@@ -7,7 +7,6 @@
     export let style = " ";
     export let logo: boolean = false;
     export let src: string = "";
-    export let loginGood: boolean = false;
     export let onclick: () => void = () => {};
 </script>
 
