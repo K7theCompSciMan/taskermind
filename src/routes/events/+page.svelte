@@ -1,8 +1,9 @@
 <script lang="ts">
+	import EventCard from '$lib/EventCard.svelte';
 
 	import Button from '$lib/Button.svelte';
-	import CreateEventPopup from '$lib/CreateEventPopup.svelte';
 	import { page } from '$app/stores';
+	import CreateEventPopup from '$lib/CreateEventPopup.svelte';
 	import type { Event } from '$lib/index';
 	import type { ActionData } from './$types';
 	let events: Event[] = [];
@@ -14,8 +15,8 @@
 	const openCreateEventDropdown = () => {
 		createEventDropdown = true;
 	};
-	$: notdropdowndisplay = createEventDropdown ? 'opacity-0' : 'opacity-100';
-	$: dropdownDisplay = createEventDropdown ? 'opacity-100' : 'opacity-0';
+	$: notdropdowndisplay = createEventDropdown ? 'hidden' : 'opacity-100';
+	$: dropdownDisplay = createEventDropdown ? 'opacity-100' : 'hidden';
 	if (!events) {
 		events = [];
 		openCreateEventDropdown();
@@ -23,18 +24,22 @@
 	export let form: ActionData;
 </script>
 
-<Button name="Create Event" onclick={openCreateEventDropdown} size="w-40 {notdropdowndisplay}" />
-<div class="{notdropdowndisplay} flex flex-col md:flex-row border absolute left-[12.5%] w-fit h-fit">
+<Button
+	name="Create Event"
+	onclick={openCreateEventDropdown}
+	size="w-40 {notdropdowndisplay} left-[80%]"
+/>
+<br />
+<br />
+<div
+	class="{notdropdowndisplay} flex flex-col md:flex-row absolute rounded-2xl left-[10%] w-[80%] h-[80%] bg-blue-500 pl-2 pr-2 no-scrollbar"
+>
+	{#if events.length === 0}
+		<h1 class="text-2xl text-blue-500">No Events Found</h1>
+	{/if}
 	{#each events as event}
-		<div class="border w-[75%] h-[75%] pl-2 flex-col items-center ml-[12.5%]">
-			<h1 class="font-bold text-2xl text-blue-500 border w-fit h-fit p-2 m-2 mb-8 relative">
-				{event.name}
-			</h1>
-			<p class="text-lg text-slate-100">{event.description}</p>
-			<p class="text-lg text-slate-100">Start Date: {event.startDate}</p>
-			<p class="text-lg text-slate-100">End Date: {event.endDate}</p>
-		</div>
+		<EventCard {event} />
 	{/each}
 </div>
 <!-- svelte-ignore missing-declaration -->
-<CreateEventPopup form={form} bind:dropdownDisplay={dropdownDisplay} closeCreateEventDropdown={closeCreateEventDropdown} />
+<CreateEventPopup {form} bind:dropdownDisplay {closeCreateEventDropdown} />

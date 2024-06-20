@@ -1,4 +1,6 @@
 <script lang="ts">
+	import type { ActionData } from "../routes/$types";
+
 	export let form: ActionData;
 	export let dropdownDisplay: string;
     export let closeCreateEventDropdown: () => void;
@@ -23,9 +25,9 @@
 		Create a new Event!
 	</h1>
 	<form action="?/create" method="POST" class="border rounded-xl w-fit p-10 bg-teal-500">
-		<div class="flex justify-center align-self-center">
+		<!-- <div class="flex justify-center align-self-center">
 			{#if form?.error}<p class=" text-red-700 font-bold">{form?.error}</p>{/if}
-		</div>
+		</div> -->
 		<div>
 			<input
 				type="text"

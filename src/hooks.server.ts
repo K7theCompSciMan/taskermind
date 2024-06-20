@@ -15,12 +15,12 @@ export const handle: Handle = async ({ event, resolve }) => {
 		});
 		const accessToken = (await response.json()).accessToken;
 		event.locals.accessToken = accessToken;
-		const res = await fetch('https://taskermind-api.fly.dev/session/user', {
+		const res = await fetch('https://taskermind-api.fly.dev/me', {
 			headers: {
 				authorization: `Bearer ${accessToken}`
 			}
 		});
-		const user = (await res.json()).user;
+		const user = await res.json();
 		if (res.status === 200) {
 			event.locals.user = user;
 		}
