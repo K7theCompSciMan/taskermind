@@ -9,7 +9,6 @@ import TheWelcome from './components/TheWelcome.vue'
 
   // Import Bootstrap and BootstrapVue source SCSS files
   @import '../node_modules/bootstrap/scss/bootstrap.scss';
-  //@import '../node_modules/bootstrap-vue/src/index.scss';
 
 </style>
 <template>
