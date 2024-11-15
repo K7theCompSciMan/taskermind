@@ -1,4 +1,4 @@
-# taskermind
+# 
 
 This template should help get you started developing with Vue 3 in Vite.
 
@@ -12,34 +12,28 @@ TypeScript cannot handle type information for `.vue` imports by default, so we r
 
 ## Customize configuration
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+See [Vite Configuration Reference](https://vite.dev/config/).
 
 ## Project Setup
 
 ```sh
-npm install
+bun install
 ```
 
 ### Compile and Hot-Reload for Development
 
 ```sh
-npm run dev
+bun dev
 ```
 
 ### Type-Check, Compile and Minify for Production
 
 ```sh
-npm run build
+bun build
 ```
 
 ### Run Unit Tests with [Vitest](https://vitest.dev/)
 
 ```sh
-npm run test:unit
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
+bun test:unit
 ```
