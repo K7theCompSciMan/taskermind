@@ -22,7 +22,7 @@ const collapsed = ref(false);
             <Button text="Tasks" target="/tasks" image_src=""  ></Button>
             <Button text="Events" target="/events" image_src=""  ></Button>
             <Button text="Calendar" target="/calendar" image_src=""  ></Button>
-        </nav>
+        </nav> 
     </Transition>
     <button class="open" @click="collapsed = false" v-if="collapsed" >
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="collapser">
