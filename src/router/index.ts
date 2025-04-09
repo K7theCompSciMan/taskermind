@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import AboutView from '../views/AboutView.vue'
-import TaskView from '../views/TaskView.vue'
-import CalView from '../views/CalView.vue'
+import HomeView from '@/views/HomeView.vue'
+import AboutView from '@/views/AboutView.vue'
+import TaskView from '@/views/TaskView.vue'
+import CalView from "@/views/CalView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -29,7 +29,7 @@ const router = createRouter({
       component: TaskView,
     },
     {
-      path: '/cal',
+      path: '/calendar',
       name: 'calender',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route

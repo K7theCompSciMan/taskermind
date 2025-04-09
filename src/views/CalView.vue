@@ -1,3 +1,14 @@
+<script setup lang="ts">
+  import FullCalendar from '@fullcalendar/vue3'
+  import dayGridPlugin from '@fullcalendar/daygrid'
+
+  // Simple static events
+  const events = [
+    { title: 'Math Test', date: '2025-04-10' },
+    { title: 'Birthday Party', date: '2025-04-15' }
+  ]
+</script>
+
 <template>
     <div class="p-4">
       <FullCalendar
@@ -6,16 +17,4 @@
         :events="events"
       />
     </div>
-  </template>
-  
-  <script setup>
-  import FullCalendar from '@fullcalendar/vue3'
-  import dayGridPlugin from '@fullcalendar/daygrid'
-  
-  // Simple static events
-  const events = [
-    { title: 'Math Test', date: '2025-04-10' },
-    { title: 'Birthday Party', date: '2025-04-15' }
-  ]
-  </script>
-  
+</template>
