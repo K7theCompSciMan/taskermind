@@ -6,10 +6,12 @@ import Nav from "./components/Nav.vue";
 <template>
 	<div class="container">
 		<Nav></Nav>
-
-		<router-view></router-view>
-	</div>
+    <router-view /> <!-- Active component will be rendered here -->
+    
+    </div>
 </template>
+
+
 
 <script lang="ts">
 export default {
@@ -17,9 +19,11 @@ export default {
 };
 </script>
 
+
+
 <style scoped>
 .container {
-	background-color: var((--color-background));
+	background-color: var(--color-background);
 	width: 100vw;
   height: 100vh;
   margin-left: 0;
