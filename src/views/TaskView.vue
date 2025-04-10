@@ -1,10 +1,28 @@
 <template>
   <div id="app">
-    <h1>Task Manager</h1>
+    <div class="header-section">
+      <h1>Task Manager</h1>
+      <button @click="openAddModal" class="add-task-button">+ Add Task</button>
+    </div>
 
-    <!-- Horizontal Add Button -->
-    <button @click="openAddModal" class="add-task-button">+ Add Task</button>
-
+    <!-- Task List -->
+    <div class="task-list">
+      <h2>Tasks</h2>
+      <ul>
+        <li v-for="(task, index) in tasks" :key="task.id" :class="{ completed: task.completed }">
+          <input type="checkbox" v-model="task.completed" />
+          <h3>{{ task.title }}</h3>
+          <p>{{ task.description }}</p>
+          <p>Subject: {{ task.subject }}</p>
+          <p>Deadline: {{ task.deadline }}</p>
+          <p>Priority: {{ task.priority }}</p>
+          <div class="actions">
+            <button @click="editTask(index)">Edit</button>
+            <button @click="deleteTask(index)">Delete</button>
+          </div>
+        </li>
+      </ul>
+    </div>
 
     <!-- Modal -->
     <div v-if="showModal" class="modal-overlay">
@@ -34,25 +52,6 @@
         </button>
         <button @click="closeModal">Cancel</button>
       </div>
-    </div>
-
-    <!-- Task List -->
-    <div class="task-list">
-      <h2>Tasks</h2>
-      <ul>
-        <li v-for="(task, index) in tasks" :key="task.id" :class="{ completed: task.completed }">
-          <input type="checkbox" v-model="task.completed" />
-          <h3>{{ task.title }}</h3>
-          <p>{{ task.description }}</p>
-          <p>Subject: {{ task.subject }}</p>
-          <p>Deadline: {{ task.deadline }}</p>
-          <p>Priority: {{ task.priority }}</p>
-          <div class="actions">
-            <button @click="editTask(index)">Edit</button>
-            <button @click="deleteTask(index)">Delete</button>
-          </div>
-        </li>
-      </ul>
     </div>
   </div>
 </template>
@@ -178,7 +177,7 @@ export default {
 
 button {
   padding: 0.6rem 1.2rem;
-  margin-right: 0.5rem;
+  margin-right: 0.4rem;
   font-size: 1rem;
   border: none;
   border-radius: 6px;
@@ -195,7 +194,7 @@ button:first-of-type {
 }
 
 button:last-of-type {
-  background-color: #ef4444; /* red */
+  background-color: #8321ec; /* red */
   color: white;
 }
 
@@ -252,4 +251,29 @@ button:last-of-type {
   background-color: #2563eb; /* slightly darker blue */
 }
 
+.header-section {
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.header-section h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+/* Ensure there’s no restriction on the layout of the task list */
+#app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.task-list {
+  width: 100%;
+  max-width: 800px;
+  margin-top: 2rem; /* Adding space between button and task list */
+}
 </style>
