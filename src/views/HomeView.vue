@@ -51,4 +51,3 @@ export default {
   background-color: #2563eb; /* slightly darker blue */
 }
 </style>
-
