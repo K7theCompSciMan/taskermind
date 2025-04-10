@@ -2,7 +2,6 @@
   <div class="home-wrapper">
     <div class="home-container">
       <h1 class="home-title">Welcome to the Home Page</h1>
-      <button class="big-button" @click="goToTaskView">Go to Task View</button>
     </div>
   </div>
 </template>
@@ -51,3 +50,4 @@ export default {
   background-color: #2563eb; /* slightly darker blue */
 }
 </style>
+
