@@ -1,8 +1,19 @@
 <template>
   <div id="app">
     <div class="header-section">
-      <h1>Task Manager</h1>
+      <h1>Task Manager <span class="date">({{ currentDate }})</span></h1>
       <button @click="openAddModal" class="add-task-button">+ Add Task</button>
+    </div>
+
+    <!-- Inspirational Quote -->
+    <div class="quote-section">
+      <p>{{ inspirationalQuote }}</p>
+    </div>
+
+    <!-- Real-Time Feedback -->
+    <div class="feedback-section">
+      <h2>Smart Progress Feedback</h2>
+      <p>{{ feedbackMessage }}</p>
     </div>
 
     <!-- Task List -->
@@ -16,6 +27,8 @@
           <p>Subject: {{ task.subject }}</p>
           <p>Deadline: {{ task.deadline }}</p>
           <p>Priority: {{ task.priority }}</p>
+          <p v-if="task.estimatedTime !== null">Estimated Time: {{ task.estimatedTime }} hrs</p>
+          <p v-else>Estimated Time: Not set</p>
           <div class="actions">
             <button @click="editTask(index)">Edit</button>
             <button @click="deleteTask(index)">Delete</button>
@@ -47,6 +60,7 @@
           <option>Electives</option>
           <option>Out of school</option>
         </select>
+        <input v-model.number="newTask.estimatedTime" type="number" min="0" placeholder="Estimated time (hrs)" />
         <button @click="submitTask">
           {{ editingTaskIndex !== null ? 'Update Task' : '+ Add Task' }}
         </button>
@@ -57,30 +71,52 @@
 </template>
 
 <script lang="ts">
+interface Task {
+  id: number;
+  title: string;
+  description: string;
+  deadline: string;
+  priority: string;
+  subject: string;
+  estimatedTime: number | null;
+  completed: boolean;
+}
+
 export default {
   name: "TaskView",
   data() {
     return {
       showModal: false,
       editingTaskIndex: null as number | null,
-      tasks: [] as {
-        id: number;
-        title: string;
-        description: string;
-        deadline: string;
-        priority: string;
-        subject: string;
-        completed: boolean;
-      }[],
+      tasks: [] as Task[],
+      feedbackMessage: '',
+      currentDate: new Date().toLocaleDateString(), // Add the current date
+      inspirationalQuotes: [
+        "The only way to do great work is to love what you do. - Steve Jobs",
+        "Success is not the key to happiness. Happiness is the key to success. - Albert Schweitzer",
+        "Don't watch the clock; do what it does. Keep going. - Sam Levenson",
+        "Believe you can and you're halfway there. - Theodore Roosevelt",
+        "The future depends on what you do today. - Mahatma Gandhi",
+        "The best way to predict the future is to create it. - Peter Drucker",
+        "Start where you are. Use what you have. Do what you can. - Arthur Ashe"
+      ],
+      inspirationalQuote: '',
       newTask: {
         title: '',
         description: '',
         deadline: '',
         priority: '',
         subject: '',
+        estimatedTime: null as number | null,
         completed: false
       }
     };
+  },
+  watch: {
+    tasks: {
+      handler: 'updateFeedback',
+      deep: true
+    }
   },
   methods: {
     openAddModal() {
@@ -103,7 +139,7 @@ export default {
           };
         } else {
           // Add new task
-          const task = {
+          const task: Task = {
             id: Date.now(),
             ...this.newTask
           };
@@ -129,6 +165,7 @@ export default {
         deadline: '',
         priority: '',
         subject: '',
+        estimatedTime: null,
         completed: false
       };
     },
@@ -136,7 +173,28 @@ export default {
       this.showModal = false;
       this.editingTaskIndex = null;
       this.resetNewTask();
+    },
+    updateFeedback() {
+      const totalTasks = this.tasks.length;
+      const completedTasks = this.tasks.filter(task => task.completed).length;
+
+      if (totalTasks === 0) {
+        this.feedbackMessage = "No tasks added yet. Let's get started!";
+      } else if (completedTasks === totalTasks) {
+        this.feedbackMessage = "Awesome! All tasks completed!";
+      } else if (completedTasks > 0) {
+        this.feedbackMessage = `Nice! You've completed ${completedTasks} of ${totalTasks} tasks.`;
+      } else {
+        this.feedbackMessage = "You're off to a great start. Try completing your first task!";
+      }
+    },
+    getDailyQuote() {
+      const todayIndex = new Date().getDate() % this.inspirationalQuotes.length;
+      this.inspirationalQuote = this.inspirationalQuotes[todayIndex];
     }
+  },
+  created() {
+    this.getDailyQuote(); // Set the inspirational quote when the component is created
   }
 };
 </script>
@@ -189,12 +247,12 @@ button:hover {
 }
 
 button:first-of-type {
-  background-color: #3b82f6; /* blue */
+  background-color: #3b82f6;
   color: white;
 }
 
 button:last-of-type {
-  background-color: #8321ec; /* red */
+  background-color: #8321ec;
   color: white;
 }
 
@@ -221,18 +279,16 @@ button:last-of-type {
 }
 
 .actions button {
-  background-color: #10b981; /* green for edit */
+  background-color: #10b981;
   color: white;
 }
 
 .actions button:last-of-type {
-  background-color: #ef4444; /* red for delete */
+  background-color: #ef4444;
 }
 
-/* Add this at the end of your <style scoped> block */
-
 .add-task-button {
-  background-color: #3b82f6; /* blue */
+  background-color: #3b82f6;
   color: white;
   padding: 1rem 3rem;
   font-size: 1.2rem;
@@ -248,7 +304,7 @@ button:last-of-type {
 }
 
 .add-task-button:hover {
-  background-color: #2563eb; /* slightly darker blue */
+  background-color: #2563eb;
 }
 
 .header-section {
@@ -262,7 +318,6 @@ button:last-of-type {
   margin-bottom: 1rem;
 }
 
-/* Ensure there’s no restriction on the layout of the task list */
 #app {
   display: flex;
   flex-direction: column;
@@ -274,6 +329,22 @@ button:last-of-type {
 .task-list {
   width: 100%;
   max-width: 800px;
-  margin-top: 2rem; /* Adding space between button and task list */
+  margin-top: 2rem;
+}
+
+.feedback-section {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #4b5563;
+}
+
+.quote-section {
+  text-align: center;
+  font-style: italic;
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  color: #6b7280;
 }
 </style>
