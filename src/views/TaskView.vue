@@ -1,47 +1,58 @@
 <template>
   <div id="app">
     <h1>Task Manager</h1>
-    <!-- Task input section -->
-    <div class="task-input">
-      <input
-          v-model="newTask.title"
-          placeholder="Enter task title"
-          type="text"
-      />
-      <input
-          v-model="newTask.deadline"
-          placeholder="Deadline (YYYY-MM-DD)"
-          type="date"
-      />
-      <button @click="addTask">Add Task</button>
+
+    <!-- Horizontal Add Button -->
+    <button @click="openAddModal" class="add-task-button">+ Add Task</button>
+
+
+    <!-- Modal -->
+    <div v-if="showModal" class="modal-overlay">
+      <div class="modal">
+        <h2>{{ editingTaskIndex !== null ? 'Edit Task' : 'Add New Task' }}</h2>
+        <input v-model="newTask.title" placeholder="Enter task title" />
+        <textarea v-model="newTask.description" placeholder="Enter task description (optional)"></textarea>
+        <input v-model="newTask.deadline" type="date" />
+        <select v-model="newTask.priority">
+          <option disabled value="">Select Priority</option>
+          <option>Low</option>
+          <option>Medium</option>
+          <option>High</option>
+        </select>
+        <select v-model="newTask.subject">
+          <option disabled value="">Select Subject</option>
+          <option>Mathematics</option>
+          <option>Science</option>
+          <option>English</option>
+          <option>History</option>
+          <option>Language</option>
+          <option>Electives</option>
+          <option>Out of school</option>
+        </select>
+        <button @click="submitTask">
+          {{ editingTaskIndex !== null ? 'Update Task' : '+ Add Task' }}
+        </button>
+        <button @click="closeModal">Cancel</button>
+      </div>
     </div>
 
-    <!-- Task list section -->
+    <!-- Task List -->
     <div class="task-list">
       <h2>Tasks</h2>
       <ul>
-        <li v-for="(task, index) in tasks" :key="task.id">
-          <div class="task-item">
-            <div class="task-details">
-              <h3>{{ task.title }}</h3>
-              <p>Deadline: {{ task.deadline }}</p>
-            </div>
-            <div class="task-actions">
-              <button @click="editTask(task, index)">Edit</button>
-              <button @click="deleteTask(index)">Delete</button>
-            </div>
+        <li v-for="(task, index) in tasks" :key="task.id" :class="{ completed: task.completed }">
+          <input type="checkbox" v-model="task.completed" />
+          <h3>{{ task.title }}</h3>
+          <p>{{ task.description }}</p>
+          <p>Subject: {{ task.subject }}</p>
+          <p>Deadline: {{ task.deadline }}</p>
+          <p>Priority: {{ task.priority }}</p>
+          <div class="actions">
+            <button @click="editTask(index)">Edit</button>
+            <button @click="deleteTask(index)">Delete</button>
           </div>
         </li>
       </ul>
-    </div>
-
-    <!-- Task editor for editing a task -->
-    <div v-if="selectedTask" class="task-editor">
-      <h2>Edit Task</h2>
-      <input v-model="selectedTask.title" type="text" />
-      <input v-model="selectedTask.deadline" type="date" />
-      <button @click="saveTaskChanges">Save</button>
-      <button @click="cancelEditing">Cancel</button>
     </div>
   </div>
 </template>
@@ -51,88 +62,194 @@ export default {
   name: "TaskView",
   data() {
     return {
-      tasks: [] as { id: number; title: string; deadline: string }[],
+      showModal: false,
+      editingTaskIndex: null as number | null,
+      tasks: [] as {
+        id: number;
+        title: string;
+        description: string;
+        deadline: string;
+        priority: string;
+        subject: string;
+        completed: boolean;
+      }[],
       newTask: {
         title: '',
-        deadline: ''
-      },
-      selectedTask: null as { id: number; title: string; deadline: string } | null,
-      taskIndex: null as number | null
+        description: '',
+        deadline: '',
+        priority: '',
+        subject: '',
+        completed: false
+      }
     };
   },
   methods: {
-    addTask() {
-      if (this.newTask.title && this.newTask.deadline) {
-        const newTask = {
-          id: Date.now(), // Unique ID
-          title: this.newTask.title,
-          deadline: this.newTask.deadline
-        };
-        this.tasks.push(newTask);
-        this.newTask.title = '';
-        this.newTask.deadline = '';
+    openAddModal() {
+      this.resetNewTask();
+      this.editingTaskIndex = null;
+      this.showModal = true;
+    },
+    submitTask() {
+      if (
+        this.newTask.title &&
+        this.newTask.deadline &&
+        this.newTask.priority &&
+        this.newTask.subject
+      ) {
+        if (this.editingTaskIndex !== null) {
+          // Edit existing task
+          this.tasks[this.editingTaskIndex] = {
+            ...this.tasks[this.editingTaskIndex],
+            ...this.newTask
+          };
+        } else {
+          // Add new task
+          const task = {
+            id: Date.now(),
+            ...this.newTask
+          };
+          this.tasks.push(task);
+        }
+        this.resetNewTask();
+        this.showModal = false;
+        this.editingTaskIndex = null;
       }
-    },
-    editTask(task: { id: number; title: string; deadline: string }, index: number) {
-      this.selectedTask = { ...task };
-      this.taskIndex = index;
-    },
-    saveTaskChanges() {
-      if (this.taskIndex !== null && this.selectedTask) {
-        this.tasks[this.taskIndex] = { ...this.selectedTask };
-        this.selectedTask = null;
-        this.taskIndex = null;
-      }
-    },
-    cancelEditing() {
-      this.selectedTask = null;
-      this.taskIndex = null;
     },
     deleteTask(index: number) {
       this.tasks.splice(index, 1);
+    },
+    editTask(index: number) {
+      this.newTask = { ...this.tasks[index] };
+      this.editingTaskIndex = index;
+      this.showModal = true;
+    },
+    resetNewTask() {
+      this.newTask = {
+        title: '',
+        description: '',
+        deadline: '',
+        priority: '',
+        subject: '',
+        completed: false
+      };
+    },
+    closeModal() {
+      this.showModal = false;
+      this.editingTaskIndex = null;
+      this.resetNewTask();
     }
   }
 };
 </script>
 
 <style scoped>
-#app {
-  text-align: center;
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
-.task-input input {
-  margin: 10px;
-  padding: 8px;
+.modal {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.modal input,
+.modal textarea,
+.modal select {
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
 }
 
 button {
-  padding: 8px 16px;
-  margin: 5px;
+  padding: 0.6rem 1.2rem;
+  margin-right: 0.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
   cursor: pointer;
 }
 
-.task-list {
-  margin-top: 20px;
+button:hover {
+  opacity: 0.9;
 }
 
-.task-item {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-  border: 1px solid #ddd;
-  margin-bottom: 10px;
+button:first-of-type {
+  background-color: #3b82f6; /* blue */
+  color: white;
 }
 
-.task-actions button {
-  margin-left: 10px;
+button:last-of-type {
+  background-color: #ef4444; /* red */
+  color: white;
 }
 
-.task-editor input {
-  margin: 10px;
-  padding: 8px;
+.task-list ul {
+  list-style: none;
+  padding: 0;
 }
 
-.task-editor button {
-  margin: 5px;
+.task-list li {
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  position: relative;
 }
+
+.task-list li.completed {
+  opacity: 0.6;
+  text-decoration: line-through;
+}
+
+.actions {
+  margin-top: 0.5rem;
+}
+
+.actions button {
+  background-color: #10b981; /* green for edit */
+  color: white;
+}
+
+.actions button:last-of-type {
+  background-color: #ef4444; /* red for delete */
+}
+
+/* Add this at the end of your <style scoped> block */
+
+.add-task-button {
+  background-color: #3b82f6; /* blue */
+  color: white;
+  padding: 1rem 3rem;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  width: 300px;
+  text-align: center;
+  margin: 2rem auto;
+  display: block;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s;
+}
+
+.add-task-button:hover {
+  background-color: #2563eb; /* slightly darker blue */
+}
+
 </style>
