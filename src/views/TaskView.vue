@@ -21,7 +21,7 @@
       <h2>Tasks</h2>
       <ul>
         <li v-for="task in sortedTasks" :key="task.id" :class="{ completed: task.completed }">
-          <input type="checkbox" v-model="task.completed" @click="submitTask()" />
+          <input type="checkbox" v-model="task.completed" v-on:click="() => {task.completed = !task.completed; updateTask(task);}"/>
           <h3>{{ task.title }}</h3>
           <p>{{ task.description }}</p>
           <p>Subject: {{ task.subject }}</p>
@@ -160,6 +160,29 @@ export default {
       this.editingTaskIndex = null;
       this.showModal = true;
     },
+    async updateTask(taskToUpdate: Task) {
+      let originalTask = this.tasks.find((task) => task.id === taskToUpdate.id);
+      let index = this.tasks.indexOf(originalTask!);
+      this.tasks[index] = taskToUpdate;
+      let tasks: Task[] = [];
+      this.tasks.map((task) => tasks.push({...task}));
+      const res = await fetch("https://taskermind-api.fly.dev/user", {
+        method: "PUT",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem("accessToken")}`,
+          'Connection': 'keep-alive'
+        },
+        body: JSON.stringify({
+          tasks
+        })
+      });
+      // console.log('updatedTask')
+      const data = await res.json();
+      // console.log(data);
+      this.user = data.user;
+      this.tasks = this.user.tasks;
+    },
     async submitTask() {
       if (
         this.newTask.title &&
@@ -184,7 +207,7 @@ export default {
             body: JSON.stringify({
               tasks
             })
-          })
+          });
           const data = await res.json();
           this.user = data.user;
           this.tasks = this.user.tasks;
