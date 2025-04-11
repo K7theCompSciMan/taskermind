@@ -88,7 +88,6 @@ nav {
     flex-direction: column;
     background-color: var(--color-secondary);
     border: 1px solid var(--color-border);
-    width: 10vw;
     position: sticky;
     top: 0;
     padding-top: 5vh;

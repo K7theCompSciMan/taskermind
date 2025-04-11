@@ -58,6 +58,9 @@ localStorage.setItem("studentName", user.username)
     <input class = "email" type="email" placeholder="Username" v-model="email">
     <input class = "password" type="password" placeholder="Password" v-model="password">
     <br>
+    <input class = "password" type="password" placeholder="Confirm Password" v-model="password">
+    <p class = match> Does Not Match</p>
+    <br>
     <button class = "button" @click="submitForm()" >Submit</button>
     <button class = "signup" @click="signUp()" >Sign Up</button>
     
