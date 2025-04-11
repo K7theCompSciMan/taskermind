@@ -2,6 +2,7 @@
 import {useRouter} from "vue-router";
 import {useCookies} from 'vue3-cookies';
 import router from "@/router";
+import {onMounted} from "vue";
 const { cookies } = useCookies();
 export type User = {
   id: string,
@@ -10,6 +11,16 @@ export type User = {
 
 let email: string = "";
 let password: string = "";
+
+onMounted(async() => {
+  if(localStorage.getItem("accessToken")) {
+    localStorage.removeItem("user");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("studentName")
+    cookies.remove("refreshToken");
+  }
+})
 
 
 const submitForm = async() => {
