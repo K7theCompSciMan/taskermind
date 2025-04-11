@@ -34,7 +34,7 @@ const submitForm = async() => {
         });
         alert("Verification successful");
         localStorage.removeItem("verificationCode");
-        router.push('/');
+        await router.push('/');
     } else {
         alert("Verification failed");
     }

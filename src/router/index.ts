@@ -48,7 +48,7 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: AuthVue,
     },
-    ,{
+    {
       path: '/events',
       name: 'events',
       // route level code-splitting
