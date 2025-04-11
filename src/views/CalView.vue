@@ -26,7 +26,7 @@
           @click="selectDate(date.date)"
         >
             <p>{{ date.date.getDate() }}</p>
-            <p style="font-size:small">{{ tasks.filter((task) => task.dueDate == date.date.toISOString().substring(0, 10) ).length > 0 ? `${tasks.filter((task) => task.dueDate == date.date.toISOString().substring(0, 10) ).length > 1 ? `${tasks.filter((task) => task.dueDate == date.date.toISOString().substring(0, 10) ).length} tasks`: `${tasks.filter((task) => task.dueDate == date.date.toISOString().substring(0, 10) ).length} task`}` :""}} </p>
+            <p style="font-size:small">{{ tasks.filter((task) => task.dueDate == date.date.toISOString().substring(0, 10) && !task.completed ).length > 0 ? `${tasks.filter((task) => task.dueDate == date.date.toISOString().substring(0, 10) ).length > 1 ? `${tasks.filter((task) => task.dueDate == date.date.toISOString().substring(0, 10) ).length} tasks`: `${tasks.filter((task) => task.dueDate == date.date.toISOString().substring(0, 10) ).length} task`}` :""}} </p>
         </div>
       </div>
     </div>
