@@ -20,7 +20,7 @@
     <div class="task-list">
       <h2>Tasks</h2>
       <ul>
-        <li v-for="(task, index) in sortedTasks" :key="task.id" :class="{ completed: task.completed }">
+        <li v-for="task in sortedTasks" :key="task.id" :class="{ completed: task.completed }">
           <input type="checkbox" v-model="task.completed" />
           <h3>{{ task.title }}</h3>
           <p>{{ task.description }}</p>
@@ -30,8 +30,8 @@
           <p v-if="task.estimatedTime !== null">Estimated Time: {{ task.estimatedTime }} hrs</p>
           <p v-else>Estimated Time: Not set</p>
           <div class="actions">
-            <button @click="editTask(index)">Edit</button>
-            <button @click="deleteTask(index)">Delete</button>
+            <button @click="editTask(task.id)">Edit</button>
+            <button @click="deleteTask(task.id)">Delete</button>
           </div>
         </li>
       </ul>
@@ -168,13 +168,19 @@ export default {
         this.editingTaskIndex = null;
       }
     },
-    deleteTask(index: number) {
-      this.tasks.splice(index, 1);
+    deleteTask(id: number) {
+      const index = this.tasks.findIndex(task => task.id === id);
+      if (index !== -1) {
+        this.tasks.splice(index, 1);
+      }
     },
-    editTask(index: number) {
-      this.newTask = { ...this.tasks[index] };
-      this.editingTaskIndex = index;
-      this.showModal = true;
+    editTask(id: number) {
+      const index = this.tasks.findIndex(task => task.id === id);
+      if (index !== -1) {
+        this.newTask = { ...this.tasks[index] };
+        this.editingTaskIndex = index;
+        this.showModal = true;
+      }
     },
     resetNewTask() {
       this.newTask = {
