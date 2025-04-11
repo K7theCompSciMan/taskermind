@@ -21,7 +21,7 @@
       <h2>Tasks</h2>
       <ul>
         <li v-for="task in sortedTasks" :key="task.id" :class="{ completed: task.completed }">
-          <input type="checkbox" v-model="task.completed" />
+          <input type="checkbox" v-model="task.completed" @click="submitTask()" />
           <h3>{{ task.title }}</h3>
           <p>{{ task.description }}</p>
           <p>Subject: {{ task.subject }}</p>
