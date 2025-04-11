@@ -10,7 +10,19 @@ export type User = {
 }
 
 let email: string = "";
+let username: string = "";
 let password: string = "";
+let repassword: string = "";
+let matched: boolean = false;
+
+const match = () => {
+    if (password === repassword) {
+        matched= false;
+    } else {
+        matched= true;
+    }
+}
+   
 
 onMounted(async() => {
   if(localStorage.getItem("accessToken")) {
@@ -55,14 +67,15 @@ localStorage.setItem("studentName", user.username)
 <template>
 <div class="body">
 <!--  <form>-->
-    <input class = "email" type="email" placeholder="Username" v-model="email">
-    <input class = "password" type="password" placeholder="Password" v-model="password">
+    <input class = "email" type="email" placeholder="Email" v-model="email">
+    <input class = "username" type="text" placeholder="Username" v-model="username">
     <br>
-    <input class = "password" type="password" placeholder="Confirm Password" v-model="password">
-    <p class = match> Does Not Match</p>
+    <input class = "password" type="password" placeholder="Password" v-model="password" v-on:change="match()">
+    
+    <input class = "repassword"  type="password" placeholder="Confirm Password" v-model="repassword" v-on:change="match()">
+    <p v-show="matched" class = match> Does Not Match</p>
     <br>
     <button class = "button" @click="submitForm()" >Submit</button>
-    <button class = "signup" @click="signUp()" >Sign Up</button>
     
 <!--  </form>-->
 </div>
@@ -87,6 +100,15 @@ localStorage.setItem("studentName", user.username)
   border: none;
   padding-left: 10px;
 }
+.username {
+  width: 300px;
+  height: 50px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: none;
+  padding-left: 10px;
+}
+
 .password {
   width: 300px;
   height: 50px;
@@ -114,6 +136,19 @@ localStorage.setItem("studentName", user.username)
   color: white;
   font-size: 20px;
   cursor: pointer;
+}
+
+.repassword {
+    width: 300px;
+  height: 50px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: none;
+  padding-left: 10px;
+}
+.match {
+  color: red;
+  font-size: 20px;
 }
 
 
