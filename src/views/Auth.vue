@@ -31,6 +31,7 @@ const submitForm = async() => {
   localStorage.setItem("user",user);
   localStorage.setItem("accessToken",accessToken);
   localStorage.setItem("refreshToken",refreshToken);
+  localStorage.setItem("studentName", user.username)
   cookies.set("refreshToken", refreshToken, 100000000);
   await router.push('/');
 }

@@ -143,9 +143,9 @@ onMounted(async() => {
 
 
 .big-button {
-  font-size: 1.2rem;
-  padding: 0.6rem 1.5rem;
-  background-color: #3b82f6;
+  font-size: 1.5rem;
+  padding: 1rem 2rem;
+  background-color: #3b82f6; /* optional: blue */
   color: white;
   border: none;
   border-radius: 8px;
