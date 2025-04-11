@@ -7,6 +7,18 @@ import router from "@/router";
 import {ref, onMounted} from "vue";
 const { cookies } = useCookies();
 
+let userIn = ref("");
+let verificationCode = localStorage.getItem("verificationCode");
+
+const submitForm = () => {
+    if (userIn.value === verificationCode) {
+        console.log("Verification successful");
+        localStorage.removeItem("verificationCode");
+        router.push('/auth');
+    } else {
+        console.log("Verification failed");
+    }
+}
 
 
 </script>
@@ -15,7 +27,9 @@ const { cookies } = useCookies();
 <template>
 <div class="body">
 <!--  <form>-->
-    <input class = "digs" maxlength="6" type="number" placeholder="Input Verfication Code">
+    <input class = "digs" maxlength="6" type="number" placeholder="Input Verfication Code" v-model="userIn">
+    <button class = "button" @click="submitForm()" >Submit</button>
+
     
 
     
@@ -33,7 +47,16 @@ const { cookies } = useCookies();
   margin: 0;
   padding: 0;
 }
-
+.button{
+  width: 200px;
+  height: 50px;
+  border-radius: 5px;
+  border: none;
+  background-color: var(--color-secondary);
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
 .digs {
   width: 300px;
   height: 50px;

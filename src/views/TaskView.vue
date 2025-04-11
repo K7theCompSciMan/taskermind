@@ -189,6 +189,7 @@ export default {
       this.tasks = this.user.tasks;
     },
     async submitTask() {
+
       if (
         this.newTask.title &&
         this.newTask.dueDate &&
@@ -250,6 +251,7 @@ export default {
         this.resetNewTask();
         this.showModal = false;
         this.editingTaskIndex = null;
+        this.showModal = false;
       }
     },
     async deleteTask(id: number) {
@@ -390,6 +392,7 @@ button:last-of-type {
   gap: 1rem;
   list-style: none;
   padding: 0;
+  color: black;
 }
 
 
@@ -471,7 +474,7 @@ button:last-of-type {
   margin-top: 1rem;
   font-size: 1.2rem;
   font-weight: bold;
-  color: #123970;
+  color: #1e5bb0;
 }
 
 .quote-section {
@@ -479,6 +482,6 @@ button:last-of-type {
   font-style: italic;
   margin-top: 1rem;
   font-size: 1.2rem;
-  color: #03664d;
+  color: #04a87f;
 }
 </style>

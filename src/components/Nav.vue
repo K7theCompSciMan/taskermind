@@ -85,16 +85,19 @@ svg.collapser {
 }
 nav {
     display: flex;
-    flex-direction: column;
-    background-color: var(--color-secondary);
-    border: 1px solid var(--color-border);
-    position: sticky;
-    top: 0;
-    padding-top: 5vh;
-    padding-left: 1vw;
-    padding-right: 1vw;
-    border-radius: 20px;
-    position: relative;
+  flex-direction: column;
+  background-color: var(--color-secondary);
+  border: 1px solid var(--color-border);
+  padding-top: 5vh;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  border-radius: 20px;
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 15vw; /* or any width you prefer */
+  z-index: 1000;
 }
 
 </style>
