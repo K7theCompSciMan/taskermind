@@ -4,6 +4,7 @@ import AboutView from '@/views/AboutView.vue'
 import TaskView from '@/views/TaskView.vue'
 import CalView from "@/views/CalView.vue";
 import AuthVue from "@/views/Auth.vue";
+import EventsVue from "@/views/EventsView.vue";
 import SignUpVue from "@/views/SignUpView.vue";
 import VerfVue from "@/views/VerfView.vue";
 
@@ -46,6 +47,15 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: AuthVue,
     },
+    ,{
+      path: '/events',
+      name: 'events',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: EventsVue,
+    },
+    
     {
       path: '/signup',
       name: 'signup',
