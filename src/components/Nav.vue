@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
 import Button from './NavButton.vue'
-import { ref } from 'vue';
+import {onMounted, ref} from 'vue';
 
 const navigate = (path: string) => {
     useRouter().push(path)
+}
+const getSignIn = () => {
+  return localStorage.getItem("accessToken") ? "Sign Out" : "Sign In";
 }
 
 const collapsed = ref(false);
@@ -18,6 +21,7 @@ const collapsed = ref(false);
                     <path stroke-linecap="round" stroke-linejoin="round" d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5" />
                 </svg>
             </button>
+            <Button :text="getSignIn()" target="/auth" image_src=""  ></Button>
             <Button text="Dashboard" target="/" image_src=""  ></Button>
             <Button text="Tasks" target="/tasks" image_src=""  ></Button>
             <Button text="Events" target="/events" image_src=""  ></Button>
@@ -84,7 +88,6 @@ nav {
     flex-direction: column;
     background-color: var(--color-secondary);
     border: 1px solid var(--color-border);
-    width: 10vw;
     position: sticky;
     top: 0;
     padding-top: 5vh;

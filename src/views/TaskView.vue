@@ -21,12 +21,12 @@
       <h2>Tasks</h2>
       <ul>
         <li v-for="task in sortedTasks" :key="task.id" :class="{ completed: task.completed }">
-          <input type="checkbox" v-model="task.completed" />
+          <input type="checkbox" v-model="task.completed" v-on:click="() => {task.completed = !task.completed; updateTask(task);}"/>
           <h3>{{ task.title }}</h3>
           <p>{{ task.description }}</p>
           <p>Subject: {{ task.subject }}</p>
           <p>Deadline: {{ task.dueDate }}</p>
-          <p>Priority: {{ task.priority }}</p>
+          <p class="priority" >Priority: {{ task.priority }}</p>
           <p v-if="task.estimatedTime !== null">Estimated Time: {{ task.estimatedTime }} hrs</p>
           <p v-else>Estimated Time: Not set</p>
           <div class="actions">
@@ -71,6 +71,8 @@
 </template>
 
 <script lang="ts">
+import router from "@/router";
+
 interface Task {
   id: number;
   title: string;
@@ -96,6 +98,9 @@ export default {
 
     this.tasks = this.user.tasks || []
     console.log(this.tasks);
+    if(!this.user) {
+      await router.push("/auth");
+    }
     // this.tasks = allTasks
   },
   data() {
@@ -136,8 +141,8 @@ export default {
       };
 
       return this.tasks.slice().sort((a, b) => {
-        const dateA = new Date(a.deadline);
-        const dateB = new Date(b.deadline);
+        const dateA = new Date(a.dueDate);
+        const dateB = new Date(b.dueDate);
 
         if (dateA < dateB) return -1;
         if (dateA > dateB) return 1;
@@ -160,6 +165,29 @@ export default {
       this.editingTaskIndex = null;
       this.showModal = true;
     },
+    async updateTask(taskToUpdate: Task) {
+      let originalTask = this.tasks.find((task) => task.id === taskToUpdate.id);
+      let index = this.tasks.indexOf(originalTask!);
+      this.tasks[index] = taskToUpdate;
+      let tasks: Task[] = [];
+      this.tasks.map((task) => tasks.push({...task}));
+      const res = await fetch("https://taskermind-api.fly.dev/user", {
+        method: "PUT",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem("accessToken")}`,
+          'Connection': 'keep-alive'
+        },
+        body: JSON.stringify({
+          tasks
+        })
+      });
+      // console.log('updatedTask')
+      const data = await res.json();
+      // console.log(data);
+      this.user = data.user;
+      this.tasks = this.user.tasks;
+    },
     async submitTask() {
       if (
         this.newTask.title &&
@@ -172,16 +200,19 @@ export default {
             ...this.tasks[this.editingTaskIndex],
             ...this.newTask
           };
+          let tasks: Task[] = [];
+          this.tasks.map((task) => tasks.push({...task}));
           const res = await fetch("https://taskermind-api.fly.dev/user", {
             method: "PUT",
             headers: {
-              content: 'application/json',
-              authorization: `Bearer ${localStorage.getItem("accessToken")}`
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${localStorage.getItem("accessToken")}`,
+              'Connection': 'keep-alive'
             },
             body: JSON.stringify({
-              ...this.user, tasks:this.tasks
+              tasks
             })
-          })
+          });
           const data = await res.json();
           this.user = data.user;
           this.tasks = this.user.tasks;
@@ -194,36 +225,50 @@ export default {
           this.tasks.push(task);
           let tasks: Task[] = [];
           this.tasks.map((task) => tasks.push({...task}));
-          console.log(tasks);
+          // console.log(tasks);
           this.user.tasks = tasks;
-          console.log(this.user);
+          // console.log(this.user);
+          // console.log(JSON.stringify({
+          //   tasks: tasks as Task[]
+          // }));
           const res = await fetch("https://taskermind-api.fly.dev/user", {
             method: "PUT",
             headers: {
-              content: 'application/json',
-              authorization: `Bearer ${localStorage.getItem("accessToken")}`
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${localStorage.getItem("accessToken")}`,
+              'Connection': 'keep-alive'
             },
-            body: JSON.stringify({
-            ...this.user, tasks: tasks
-            })
+            body: JSON.stringify({tasks})
           })
           const data = await res.json();
-          console.log(data);
+          // console.log(data);
           this.user = data.user;
           this.tasks = this.user.tasks;
-          console.log(this.user);
-          console.log(this.tasks);
+          // console.log(this.user);
+          // console.log(this.tasks);
         }
         this.resetNewTask();
         this.showModal = false;
         this.editingTaskIndex = null;
       }
     },
-    deleteTask(id: number) {
-      const index = this.tasks.findIndex(task => task.id === id);
-      if (index !== -1) {
-        this.tasks.splice(index, 1);
-      }
+    async deleteTask(id: number) {
+      this.tasks = this.tasks.filter((task) => task.id != id);
+      let tasks: Task[] = [];
+      this.tasks.map((task) => tasks.push({...task}));
+      const res = await fetch("https://taskermind-api.fly.dev/user", {
+        method: "PUT",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem("accessToken")}`,
+          'Connection': 'keep-alive'
+        },
+        body: JSON.stringify({tasks})
+      })
+      const data = await res.json();
+      console.log(data);
+      this.user = data.user;
+      this.tasks = this.user.tasks;
     },
     editTask(id: number) {
       const index = this.tasks.findIndex(task => task.id === id);
@@ -332,9 +377,16 @@ button:last-of-type {
   color: white;
 }
 
+#app .task-list{
+    align-self: flex-start;
+
+    justify-content: left;
+}
+    
+ 
 .task-list ul {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 columns */
+  grid-template-columns: repeat(5, 1fr); /* 4 columns */
   gap: 1rem;
   list-style: none;
   padding: 0;
