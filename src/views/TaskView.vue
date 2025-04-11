@@ -136,8 +136,8 @@ export default {
       };
 
       return this.tasks.slice().sort((a, b) => {
-        const dateA = new Date(a.deadline);
-        const dateB = new Date(b.deadline);
+        const dateA = new Date(a.dueDate);
+        const dateB = new Date(b.dueDate);
 
         if (dateA < dateB) return -1;
         if (dateA > dateB) return 1;
@@ -172,14 +172,17 @@ export default {
             ...this.tasks[this.editingTaskIndex],
             ...this.newTask
           };
+          let tasks: Task[] = [];
+          this.tasks.map((task) => tasks.push({...task}));
           const res = await fetch("https://taskermind-api.fly.dev/user", {
             method: "PUT",
             headers: {
-              content: 'application/json',
-              authorization: `Bearer ${localStorage.getItem("accessToken")}`
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${localStorage.getItem("accessToken")}`,
+              'Connection': 'keep-alive'
             },
             body: JSON.stringify({
-              ...this.user, tasks:this.tasks
+              tasks
             })
           })
           const data = await res.json();
@@ -194,36 +197,50 @@ export default {
           this.tasks.push(task);
           let tasks: Task[] = [];
           this.tasks.map((task) => tasks.push({...task}));
-          console.log(tasks);
+          // console.log(tasks);
           this.user.tasks = tasks;
-          console.log(this.user);
+          // console.log(this.user);
+          // console.log(JSON.stringify({
+          //   tasks: tasks as Task[]
+          // }));
           const res = await fetch("https://taskermind-api.fly.dev/user", {
             method: "PUT",
             headers: {
-              content: 'application/json',
-              authorization: `Bearer ${localStorage.getItem("accessToken")}`
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${localStorage.getItem("accessToken")}`,
+              'Connection': 'keep-alive'
             },
-            body: JSON.stringify({
-            ...this.user, tasks: tasks
-            })
+            body: JSON.stringify({tasks})
           })
           const data = await res.json();
-          console.log(data);
+          // console.log(data);
           this.user = data.user;
           this.tasks = this.user.tasks;
-          console.log(this.user);
-          console.log(this.tasks);
+          // console.log(this.user);
+          // console.log(this.tasks);
         }
         this.resetNewTask();
         this.showModal = false;
         this.editingTaskIndex = null;
       }
     },
-    deleteTask(id: number) {
-      const index = this.tasks.findIndex(task => task.id === id);
-      if (index !== -1) {
-        this.tasks.splice(index, 1);
-      }
+    async deleteTask(id: number) {
+      this.tasks = this.tasks.filter((task) => task.id != id);
+      let tasks: Task[] = [];
+      this.tasks.map((task) => tasks.push({...task}));
+      const res = await fetch("https://taskermind-api.fly.dev/user", {
+        method: "PUT",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem("accessToken")}`,
+          'Connection': 'keep-alive'
+        },
+        body: JSON.stringify({tasks})
+      })
+      const data = await res.json();
+      console.log(data);
+      this.user = data.user;
+      this.tasks = this.user.tasks;
     },
     editTask(id: number) {
       const index = this.tasks.findIndex(task => task.id === id);
