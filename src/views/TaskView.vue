@@ -154,6 +154,9 @@ export default {
     }
   },
   methods: {
+
+   
+
     openAddModal() {
       console.log(this.user);
       this.resetNewTask();
@@ -296,6 +299,7 @@ export default {
   width: 400px;
   max-width: 90%;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  color: black;
 }
 
 .modal input,
@@ -324,7 +328,7 @@ button:hover {
 
 button:first-of-type {
   background-color: #3b82f6;
-  color: white;
+  color: black;
 }
 
 button:last-of-type {
@@ -343,6 +347,7 @@ button:last-of-type {
 
 .task-list li {
   background: #f9f9f9;
+  color: black;
   padding: 1.5rem;
   border-radius: 12px;
   min-width: 220px; /* make it a bit wider */
