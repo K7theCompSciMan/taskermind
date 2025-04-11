@@ -12,11 +12,11 @@ let verificationCode = localStorage.getItem("verificationCode");
 
 const submitForm = () => {
     if (userIn.value === verificationCode) {
-        console.log("Verification successful");
+        alert("Verification successful");
         localStorage.removeItem("verificationCode");
         router.push('/auth');
     } else {
-        console.log("Verification failed");
+        alert("Verification failed");
     }
 }
 
