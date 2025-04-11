@@ -50,15 +50,55 @@ const submitForm = async() => {
 </script>
 
 <template>
-<div>
+<div class="body">
 <!--  <form>-->
-    <input type="email" placeholder="Username" v-model="email">
-    <input type="password" placeholder="Password" v-model="password">
-    <button @click="submitForm()" >Submit</button>
+    <input class = "email" type="email" placeholder="Username" v-model="email">
+    <input class = "password" type="password" placeholder="Password" v-model="password">
+    <br>
+    <button class = "button" @click="submitForm()" >Submit</button>
+
+    
 <!--  </form>-->
 </div>
 </template>
 
 <style scoped>
+
+.body {
+  
+  padding-top: 30%;
+  padding-left: 20%;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  height: 100vh;
+}
+.email {
+  width: 300px;
+  height: 50px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: none;
+  padding-left: 10px;
+}
+.password {
+  width: 300px;
+  height: 50px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: none;
+  padding-left: 10px;
+}
+.button {
+  width: 200px;
+  height: 50px;
+  border-radius: 5px;
+  border: none;
+  background-color: var(--color-accent);
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+
 
 </style>

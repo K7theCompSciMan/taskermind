@@ -22,7 +22,7 @@
       <ul>
         <li v-for="task in sortedTasks" :key="task.id" :class="{ completed: task.completed }">
           <input type="checkbox" v-model="task.completed" />
-          <h3>{{ task.title }}</h3>
+          <h3 class = "title">{{ task.title }}</h3>
           <p>{{ task.description }}</p>
           <p>Subject: {{ task.subject }}</p>
           <p>Deadline: {{ task.dueDate }}</p>
@@ -154,6 +154,9 @@ export default {
     }
   },
   methods: {
+
+   
+
     openAddModal() {
       console.log(this.user);
       this.resetNewTask();
@@ -313,6 +316,7 @@ export default {
   width: 400px;
   max-width: 90%;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  color: black;
 }
 
 .modal input,
@@ -341,7 +345,7 @@ button:hover {
 
 button:first-of-type {
   background-color: #3b82f6;
-  color: white;
+  color: black;
 }
 
 button:last-of-type {
@@ -367,6 +371,7 @@ button:last-of-type {
 
 .task-list li {
   background: #f9f9f9;
+  color: black;
   padding: 1.5rem;
   border-radius: 12px;
   min-width: 220px; /* make it a bit wider */
@@ -418,6 +423,8 @@ button:last-of-type {
   margin-bottom: 1rem;
 }
 
+
+
 .header-section h1 {
   font-size: 3rem;
   margin-bottom: 1rem;
@@ -443,7 +450,7 @@ button:last-of-type {
   margin-top: 1rem;
   font-size: 1.2rem;
   font-weight: bold;
-  color: #123970;
+  color: #1c53a1;
 }
 
 .quote-section {
@@ -451,6 +458,7 @@ button:last-of-type {
   font-style: italic;
   margin-top: 1rem;
   font-size: 1.2rem;
-  color: #03664d;
+  color: #03b488;
+font-weight: bold;
 }
 </style>
