@@ -5,6 +5,7 @@ import TaskView from '@/views/TaskView.vue'
 import CalView from "@/views/CalView.vue";
 import AuthVue from "@/views/Auth.vue";
 import SignUpVue from "@/views/SignUpView.vue";
+import VerfVue from "@/views/VerfView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -53,7 +54,19 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: SignUpVue,
     },
+<<<<<<< Updated upstream
 
+=======
+    ,{
+      path: '/verf',
+      name: 'verf',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: VerfVue,
+    },
+    
+>>>>>>> Stashed changes
   ],
 })
 
