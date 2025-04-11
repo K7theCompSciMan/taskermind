@@ -54,10 +54,7 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: SignUpVue,
     },
-<<<<<<< Updated upstream
-
-=======
-    ,{
+    {
       path: '/verf',
       name: 'verf',
       // route level code-splitting
@@ -65,8 +62,6 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: VerfVue,
     },
-    
->>>>>>> Stashed changes
   ],
 })
 

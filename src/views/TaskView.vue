@@ -71,6 +71,8 @@
 </template>
 
 <script lang="ts">
+import router from "@/router";
+
 interface Task {
   id: number;
   title: string;
@@ -96,6 +98,9 @@ export default {
 
     this.tasks = this.user.tasks || []
     console.log(this.tasks);
+    if(!this.user) {
+      await router.push("/auth");
+    }
     // this.tasks = allTasks
   },
   data() {
