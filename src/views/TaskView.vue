@@ -10,6 +10,8 @@
       <p>{{ inspirationalQuote }}</p>
     </div>
 
+
+
     <!-- Real-Time Feedback -->
     <div class="feedback-section">
       <h2>Smart Progress Feedback</h2>
@@ -71,7 +73,8 @@
 </template>
 
 <script lang="ts">
-import router from "@/router";
+
+
 
 interface Task {
   id: number;
