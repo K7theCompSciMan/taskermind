@@ -399,9 +399,7 @@ button:last-of-type {
   margin-bottom: 1rem;
 }
 
-.title {
-    justify-self: center;
-}
+
 
 .header-section h1 {
   font-size: 3rem;
