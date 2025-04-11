@@ -20,7 +20,7 @@
     <div class="task-list">
       <h2>Tasks</h2>
       <ul>
-        <li v-for="(task, index) in tasks" :key="task.id" :class="{ completed: task.completed }">
+        <li v-for="(task, index) in sortedTasks" :key="task.id" :class="{ completed: task.completed }">
           <input type="checkbox" v-model="task.completed" />
           <h3>{{ task.title }}</h3>
           <p>{{ task.description }}</p>
@@ -90,7 +90,7 @@ export default {
       editingTaskIndex: null as number | null,
       tasks: [] as Task[],
       feedbackMessage: '',
-      currentDate: new Date().toLocaleDateString(), // Add the current date
+      currentDate: new Date().toLocaleDateString(),
       inspirationalQuotes: [
         "The only way to do great work is to love what you do. - Steve Jobs",
         "Success is not the key to happiness. Happiness is the key to success. - Albert Schweitzer",
@@ -112,6 +112,26 @@ export default {
       }
     };
   },
+  computed: {
+    sortedTasks(): Task[] {
+      const priorityMap: Record<'High' | 'Medium' | 'Low', number> = {
+        High: 1,
+        Medium: 2,
+        Low: 3
+      };
+
+      return this.tasks.slice().sort((a, b) => {
+        const dateA = new Date(a.deadline);
+        const dateB = new Date(b.deadline);
+
+        if (dateA < dateB) return -1;
+        if (dateA > dateB) return 1;
+
+        return priorityMap[a.priority as 'High' | 'Medium' | 'Low'] -
+               priorityMap[b.priority as 'High' | 'Medium' | 'Low'];
+      });
+    }
+  },
   watch: {
     tasks: {
       handler: 'updateFeedback',
@@ -132,13 +152,11 @@ export default {
         this.newTask.subject
       ) {
         if (this.editingTaskIndex !== null) {
-          // Edit existing task
           this.tasks[this.editingTaskIndex] = {
             ...this.tasks[this.editingTaskIndex],
             ...this.newTask
           };
         } else {
-          // Add new task
           const task: Task = {
             id: Date.now(),
             ...this.newTask
@@ -194,10 +212,11 @@ export default {
     }
   },
   created() {
-    this.getDailyQuote(); // Set the inspirational quote when the component is created
+    this.getDailyQuote();
   }
 };
 </script>
+
 
 <style scoped>
 .modal-overlay {
@@ -257,17 +276,22 @@ button:last-of-type {
 }
 
 .task-list ul {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columns */
+  gap: 1rem;
   list-style: none;
   padding: 0;
 }
 
+
 .task-list li {
   background: #f9f9f9;
-  padding: 1rem;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-  position: relative;
+  padding: 1.5rem;
+  border-radius: 12px;
+  min-width: 220px; /* make it a bit wider */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
+
 
 .task-list li.completed {
   opacity: 0.6;
@@ -328,8 +352,9 @@ button:last-of-type {
 
 .task-list {
   width: 100%;
-  max-width: 800px;
+  max-width: 400px;
   margin-top: 2rem;
+  text-align: left;
 }
 
 .feedback-section {
@@ -337,7 +362,7 @@ button:last-of-type {
   margin-top: 1rem;
   font-size: 1.2rem;
   font-weight: bold;
-  color: #4b5563;
+  color: #123970;
 }
 
 .quote-section {
@@ -345,6 +370,6 @@ button:last-of-type {
   font-style: italic;
   margin-top: 1rem;
   font-size: 1.2rem;
-  color: #6b7280;
+  color: #03664d;
 }
 </style>
