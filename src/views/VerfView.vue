@@ -9,14 +9,34 @@ const { cookies } = useCookies();
 
 let userIn = ref("");
 let verificationCode = localStorage.getItem("verificationCode");
-
-const submitForm = () => {
-    if (userIn.value === verificationCode) {
-        console.log("Verification successful");
+let user = {email: ""};
+onMounted(async() => {
+    user = await (await fetch("https://taskermind-api.fly.dev/session/user", {
+        method: "GET",
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem("accessToken")}`
+        }
+    })).json();
+})
+const submitForm = async() => {
+    console.log(userIn.value);
+    console.log(verificationCode);
+    if (userIn.value == verificationCode) {
+        const res = await fetch("https://taskermind-api.fly.dev/user/verify", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem("accessToken")}`
+            },
+            body: JSON.stringify({
+                email: user.email,
+            })
+        });
+        alert("Verification successful");
         localStorage.removeItem("verificationCode");
-        router.push('/auth');
+        router.push('/');
     } else {
-        console.log("Verification failed");
+        alert("Verification failed");
     }
 }
 
