@@ -2,7 +2,7 @@
 import {useRouter} from "vue-router";
 import {useCookies} from 'vue3-cookies';
 import router from "@/router";
-import {onMounted} from "vue";
+import {ref, onMounted} from "vue";
 const { cookies } = useCookies();
 export type User = {
   id: string,
@@ -13,14 +13,11 @@ let email: string = "";
 let username: string = "";
 let password: string = "";
 let repassword: string = "";
-let matched: boolean = false;
+let matched = ref(false);
 
 const match = () => {
-    if (password === repassword) {
-        matched= false;
-    } else {
-        matched= true;
-    }
+    matched.value = password === repassword;
+    console.log("Match result:", matched.value);
 }
    
 
@@ -73,7 +70,7 @@ localStorage.setItem("studentName", user.username)
     <input class = "password" type="password" placeholder="Password" v-model="password" v-on:change="match()">
     
     <input class = "repassword"  type="password" placeholder="Confirm Password" v-model="repassword" v-on:change="match()">
-    <p v-show="matched" class = match> Does Not Match</p>
+    <p v-show="!matched" class = match> Does Not Match</p>
     <br>
     <button class = "button" @click="submitForm()" >Submit</button>
     
