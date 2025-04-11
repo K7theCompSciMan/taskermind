@@ -2,7 +2,7 @@
 import {useRouter} from "vue-router";
 import {useCookies} from 'vue3-cookies';
 import router from "@/router";
-import {onMounted} from "vue";
+import {onMounted, ref} from "vue";
 const { cookies } = useCookies();
 export type User = {
   id: string,
@@ -13,38 +13,36 @@ let email: string = "";
 let username: string = "";
 let password: string = "";
 let repassword: string = "";
-let matched: boolean = false;
+let matched = ref(false);
 
 const match = () => {
-    if (password === repassword) {
-        matched= false;
-    } else {
-        matched= true;
-    }
+    matched.value = password===repassword
 }
    
 
-onMounted(async() => {
-  if(localStorage.getItem("accessToken")) {
-    localStorage.removeItem("user");
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
-    localStorage.removeItem("studentName")
-    cookies.remove("refreshToken");
-  }
-})
+// onMounted(async() => {
+//   if(localStorage.getItem("accessToken")) {
+//     localStorage.removeItem("user");
+//     localStorage.removeItem("accessToken");
+//     localStorage.removeItem("refreshToken");
+//     localStorage.removeItem("studentName")
+//     cookies.remove("refreshToken");
+//   }
+// })
 
-const signUp = () => {
-  router.push('/signup');
-}
 
 const submitForm = async() => {
-  const res = await fetch("https://taskermind-api.fly.dev/login", {
+  if (matched) {
+    console.log(username);
+    console.log(email);
+    console.log(password);
+  const res = await fetch("https://taskermind-api.fly.dev/register", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
+      username: username,
       email: email,
       password: password,
     })
@@ -57,9 +55,11 @@ const submitForm = async() => {
   localStorage.setItem("user",user);
   localStorage.setItem("accessToken",accessToken);
   localStorage.setItem("refreshToken",refreshToken);
-localStorage.setItem("studentName", user.username)
+  localStorage.setItem("verificationCode", data.verificationCode);
+  localStorage.setItem("studentName", user.username)
   cookies.set("refreshToken", refreshToken, 100000000);
-  await router.push('/');
+  await router.push('/verify');
+  }
 }
 
 </script>
@@ -73,7 +73,7 @@ localStorage.setItem("studentName", user.username)
     <input class = "password" type="password" placeholder="Password" v-model="password" v-on:change="match()">
     
     <input class = "repassword"  type="password" placeholder="Confirm Password" v-model="repassword" v-on:change="match()">
-    <p v-show="matched" class = match> Does Not Match</p>
+    <p v-show="!matched" class = match> Does Not Match</p>
     <br>
     <button class = "button" @click="submitForm()" >Submit</button>
     
