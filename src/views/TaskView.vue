@@ -25,7 +25,7 @@
           <h3>{{ task.title }}</h3>
           <p>{{ task.description }}</p>
           <p>Subject: {{ task.subject }}</p>
-          <p>Deadline: {{ task.deadline }}</p>
+          <p>Deadline: {{ task.dueDate }}</p>
           <p>Priority: {{ task.priority }}</p>
           <p v-if="task.estimatedTime !== null">Estimated Time: {{ task.estimatedTime }} hrs</p>
           <p v-else>Estimated Time: Not set</p>
@@ -43,7 +43,7 @@
         <h2>{{ editingTaskIndex !== null ? 'Edit Task' : 'Add New Task' }}</h2>
         <input v-model="newTask.title" placeholder="Enter task title" />
         <textarea v-model="newTask.description" placeholder="Enter task description (optional)"></textarea>
-        <input v-model="newTask.deadline" type="date" />
+        <input v-model="newTask.dueDate" type="date" />
         <select v-model="newTask.priority">
           <option disabled value="">Select Priority</option>
           <option>Low</option>
@@ -75,17 +75,32 @@ interface Task {
   id: number;
   title: string;
   description: string;
-  deadline: string;
+  dueDate: string;
   priority: string;
   subject: string;
   estimatedTime: number | null;
   completed: boolean;
 }
 
+let user = {};
 export default {
   name: "TaskView",
+  async mounted() {
+    this.user = await (await fetch("https://taskermind-api.fly.dev/session/user", {
+      method: "GET",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`
+      }
+    })).json();
+    console.log(this.user);
+
+    this.tasks = this.user.tasks || []
+    console.log(this.tasks);
+    // this.tasks = allTasks
+  },
   data() {
     return {
+      user: this.user,
       showModal: false,
       editingTaskIndex: null as number | null,
       tasks: [] as Task[],
@@ -104,7 +119,7 @@ export default {
       newTask: {
         title: '',
         description: '',
-        deadline: '',
+        dueDate: '',
         priority: '',
         subject: '',
         estimatedTime: null as number | null,
@@ -120,14 +135,15 @@ export default {
   },
   methods: {
     openAddModal() {
+      console.log(this.user);
       this.resetNewTask();
       this.editingTaskIndex = null;
       this.showModal = true;
     },
-    submitTask() {
+    async submitTask() {
       if (
         this.newTask.title &&
-        this.newTask.deadline &&
+        this.newTask.dueDate &&
         this.newTask.priority &&
         this.newTask.subject
       ) {
@@ -137,13 +153,48 @@ export default {
             ...this.tasks[this.editingTaskIndex],
             ...this.newTask
           };
+          const res = await fetch("https://taskermind-api.fly.dev/user", {
+            method: "PUT",
+            headers: {
+              content: 'application/json',
+              authorization: `Bearer ${localStorage.getItem("accessToken")}`
+            },
+            body: JSON.stringify({
+              ...this.user, tasks:this.tasks
+            })
+          })
+          const data = await res.json();
+          this.user = data.user;
+          this.tasks = this.user.tasks;
         } else {
           // Add new task
           const task: Task = {
             id: Date.now(),
             ...this.newTask
           };
+
           this.tasks.push(task);
+          let tasks: Task[] = [];
+          this.tasks.map((task) => tasks.push({...task}));
+          console.log(tasks);
+          this.user.tasks = tasks;
+          console.log(this.user);
+          const res = await fetch("https://taskermind-api.fly.dev/user", {
+            method: "PUT",
+            headers: {
+              content: 'application/json',
+              authorization: `Bearer ${localStorage.getItem("accessToken")}`
+            },
+            body: JSON.stringify({
+            ...this.user, tasks: tasks
+            })
+          })
+          const data = await res.json();
+          console.log(data);
+          this.user = data.user;
+          this.tasks = this.user.tasks;
+          console.log(this.user);
+          console.log(this.tasks);
         }
         this.resetNewTask();
         this.showModal = false;
@@ -162,7 +213,7 @@ export default {
       this.newTask = {
         title: '',
         description: '',
-        deadline: '',
+        dueDate: '',
         priority: '',
         subject: '',
         estimatedTime: null,

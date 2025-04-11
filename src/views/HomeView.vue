@@ -1,21 +1,28 @@
 <template>
   <div class="home-wrapper">
     <div class="home-container">
-      <h1 class="home-title">Welcome to the Home Page</h1>
-      <button class="big-button" @click="goToTaskView">Go to Task View</button>
+      <h1 class="home-title" v-if="user" >Welcome <span>{{user.username}}</span></h1>
+      <button class="big-button" @click="router.push('/tasks')">Go to Task View</button>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: "Home",
-  methods: {
-    goToTaskView() {
-      this.$router.push('/task');
+<script setup lang="ts">
+import {onMounted} from "vue";
+import { useRouter } from "vue-router";
+import router from "@/router";
+
+let user = localStorage.getItem("user");
+onMounted(async() => {
+  user = await (await fetch("https://taskermind-api.fly.dev/session/user", {
+    method: "GET",
+    headers: {
+      authorization: `Bearer ${localStorage.getItem("accessToken")}`
     }
-  }
-};
+  })).json();
+  console.log(user)
+
+})
 </script>
 
 <style scoped>
