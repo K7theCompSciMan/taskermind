@@ -73,6 +73,8 @@
 </template>
 
 <script lang="ts">
+import router from '@/router';
+
 
 
 

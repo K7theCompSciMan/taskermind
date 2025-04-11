@@ -26,6 +26,8 @@ const collapsed = ref(false);
             <Button text="Tasks" target="/tasks" image_src=""  ></Button>
             <Button text="Events" target="/events" image_src=""  ></Button>
             <Button text="Calendar" target="/calendar" image_src=""  ></Button>
+            <!-- <Button text="P" target="/calendar" image_src=""  ></Button> -->
+
         </nav> 
     </Transition>
     <button class="open" @click="collapsed = false" v-if="collapsed" >
