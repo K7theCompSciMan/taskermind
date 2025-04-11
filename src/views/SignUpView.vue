@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import {useRouter} from "vue-router";
 import {useCookies} from 'vue3-cookies';
+import emailjs from "@emailjs/browser";
 import router from "@/router";
 import {onMounted, ref} from "vue";
+
+
 const { cookies } = useCookies();
 export type User = {
   id: string,
@@ -36,6 +39,21 @@ const submitForm = async() => {
     console.log(username);
     console.log(email);
     console.log(password);
+  const sendEmail = async (templateParams: any) => {
+      emailjs.init("UUIdfGoW6u6OLnNc7");
+      try {
+        const response = await emailjs.send(
+            "service_5wobwjn",
+            "template_fyibjzi",
+            templateParams
+        );
+
+        console.log("✅ Email sent successfully!", response);
+      } catch (error) {
+        console.error("❌ Failed to send email:", error);
+      }
+    };
+
   const res = await fetch("https://taskermind-api.fly.dev/register", {
     method: "POST",
     headers: {
@@ -58,6 +76,7 @@ const submitForm = async() => {
   localStorage.setItem("verificationCode", data.verificationCode);
   localStorage.setItem("studentName", user.username)
   cookies.set("refreshToken", refreshToken, 100000000);
+  await sendEmail({email, passcode:data.verificationCode});
   await router.push('/verify');
   }
 }
