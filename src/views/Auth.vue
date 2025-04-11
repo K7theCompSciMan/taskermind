@@ -55,7 +55,7 @@ localStorage.setItem("studentName", user.username)
 <template>
 <div class="body">
 <!--  <form>-->
-    <input class = "email" type="email" placeholder="Username" v-model="email">
+    <input class = "email" type="email" placeholder="Email" v-model="email">
     <input class = "password" type="password" placeholder="Password" v-model="password">
     <br>
     <button class = "button" @click="submitForm()" >Submit</button>
