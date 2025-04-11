@@ -26,7 +26,7 @@
           <p>{{ task.description }}</p>
           <p>Subject: {{ task.subject }}</p>
           <p>Deadline: {{ task.dueDate }}</p>
-          <p>Priority: {{ task.priority }}</p>
+          <p class="priority" >Priority: {{ task.priority }}</p>
           <p v-if="task.estimatedTime !== null">Estimated Time: {{ task.estimatedTime }} hrs</p>
           <p v-else>Estimated Time: Not set</p>
           <div class="actions">
@@ -349,9 +349,16 @@ button:last-of-type {
   color: white;
 }
 
+#app .task-list{
+    align-self: flex-start;
+
+    justify-content: left;
+}
+    
+ 
 .task-list ul {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 columns */
+  grid-template-columns: repeat(5, 1fr); /* 4 columns */
   gap: 1rem;
   list-style: none;
   padding: 0;
